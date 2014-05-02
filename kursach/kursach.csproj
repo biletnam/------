@@ -1,0 +1,452 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{89FB559F-F19B-4748-899A-A7F233FC0733}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>kursach</RootNamespace>
+    <AssemblyName>kursach</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Delete\DMedicament.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Delete\DMedicament.Designer.cs">
+      <DependentUpon>DMedicament.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Delete\DOborud.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Delete\DOborud.Designer.cs">
+      <DependentUpon>DOborud.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Delete\DPostavshik.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Delete\DPostavshik.Designer.cs">
+      <DependentUpon>DPostavshik.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Delete\DSpisokDoljnostei.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Delete\DSpisokDoljnostei.Designer.cs">
+      <DependentUpon>DSpisokDoljnostei.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Delete\DUslugi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Delete\DUslugi.Designer.cs">
+      <DependentUpon>DUslugi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Delete\DVrach.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Delete\DVrach.Designer.cs">
+      <DependentUpon>DVrach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dobavlenie\DMedicament.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dobavlenie\DMedicament.Designer.cs">
+      <DependentUpon>DMedicament.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dobavlenie\DOborud.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dobavlenie\DOborud.Designer.cs">
+      <DependentUpon>DOborud.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dobavlenie\DPostavshik.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dobavlenie\DPostavshik.Designer.cs">
+      <DependentUpon>DPostavshik.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dobavlenie\DSpisokDoljnostei.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dobavlenie\DSpisokDoljnostei.Designer.cs">
+      <DependentUpon>DSpisokDoljnostei.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dobavlenie\DUslugi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dobavlenie\DUslugi.Designer.cs">
+      <DependentUpon>DUslugi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dobavlenie\DVrach.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dobavlenie\DVrach.Designer.cs">
+      <DependentUpon>DVrach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping\10Postavshik.cs" />
+    <Compile Include="Mapping\11Raspisanie.cs" />
+    <Compile Include="Mapping\12SpisokDoljnostei.cs" />
+    <Compile Include="Mapping\13Uslugi.cs" />
+    <Compile Include="Mapping\14Vrach.cs" />
+    <Compile Include="Mapping\15Vrem.cs" />
+    <Compile Include="Mapping\16Zapis.cs" />
+    <Compile Include="Mapping\1Pacient.cs" />
+    <Compile Include="Mapping\2IspolOborud.cs" />
+    <Compile Include="Mapping\3IspolRabot.cs" />
+    <Compile Include="Mapping\4JurnalPriema.cs" />
+    <Compile Include="Mapping\5JurnalRabot.cs" />
+    <Compile Include="Mapping\6JurnalZakupok.cs" />
+    <Compile Include="Mapping\7Medicament.cs" />
+    <Compile Include="Mapping\8Nastroiki.cs" />
+    <Compile Include="Mapping\9Oborud.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dobavlenie\DPacient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dobavlenie\DPacient.Designer.cs">
+      <DependentUpon>DPacient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="operac\DZapis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="operac\DZapis.Designer.cs">
+      <DependentUpon>DZapis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="operac\RZapis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="operac\RZapis.Designer.cs">
+      <DependentUpon>RZapis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="operac\Zapis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="operac\Zapis.Designer.cs">
+      <DependentUpon>Zapis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Raspis\DelRaspisanie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Raspis\DelRaspisanie.Designer.cs">
+      <DependentUpon>DelRaspisanie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Raspis\DelVrem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Raspis\DelVrem.Designer.cs">
+      <DependentUpon>DelVrem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Raspis\DRaspisanie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Raspis\DRaspisanie.Designer.cs">
+      <DependentUpon>DRaspisanie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Raspis\DVrem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Raspis\DVrem.Designer.cs">
+      <DependentUpon>DVrem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Raspis\ERaspisanie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Raspis\ERaspisanie.Designer.cs">
+      <DependentUpon>ERaspisanie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Raspis\EVrem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Raspis\EVrem.Designer.cs">
+      <DependentUpon>EVrem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Raspis\Raspisanie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Raspis\Raspisanie.Designer.cs">
+      <DependentUpon>Raspisanie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Redaktirovanie\RMedicament.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Redaktirovanie\RMedicament.Designer.cs">
+      <DependentUpon>RMedicament.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Redaktirovanie\ROborud.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Redaktirovanie\ROborud.Designer.cs">
+      <DependentUpon>ROborud.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Redaktirovanie\RPacient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Redaktirovanie\RPacient.Designer.cs">
+      <DependentUpon>RPacient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Delete\DPacient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Delete\DPacient.Designer.cs">
+      <DependentUpon>DPacient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Redaktirovanie\RPostavshik.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Redaktirovanie\RPostavshik.Designer.cs">
+      <DependentUpon>RPostavshik.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Redaktirovanie\RSpisokdoljnostei.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Redaktirovanie\RSpisokdoljnostei.Designer.cs">
+      <DependentUpon>RSpisokdoljnostei.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Redaktirovanie\RUslugi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Redaktirovanie\RUslugi.Designer.cs">
+      <DependentUpon>RUslugi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Redaktirovanie\RVrach.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Redaktirovanie\RVrach.Designer.cs">
+      <DependentUpon>RVrach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\AlgoritmZarplat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings\AlgoritmZarplat.Designer.cs">
+      <DependentUpon>AlgoritmZarplat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\Skidka.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings\Skidka.Designer.cs">
+      <DependentUpon>Skidka.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\StrokaPodk.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings\StrokaPodk.Designer.cs">
+      <DependentUpon>StrokaPodk.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Delete\DMedicament.resx">
+      <DependentUpon>DMedicament.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Delete\DOborud.resx">
+      <DependentUpon>DOborud.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Delete\DPostavshik.resx">
+      <DependentUpon>DPostavshik.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Delete\DSpisokDoljnostei.resx">
+      <DependentUpon>DSpisokDoljnostei.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Delete\DUslugi.resx">
+      <DependentUpon>DUslugi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Delete\DVrach.resx">
+      <DependentUpon>DVrach.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dobavlenie\DMedicament.resx">
+      <DependentUpon>DMedicament.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dobavlenie\DOborud.resx">
+      <DependentUpon>DOborud.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dobavlenie\DPostavshik.resx">
+      <DependentUpon>DPostavshik.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dobavlenie\DSpisokDoljnostei.resx">
+      <DependentUpon>DSpisokDoljnostei.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dobavlenie\DUslugi.resx">
+      <DependentUpon>DUslugi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dobavlenie\DVrach.resx">
+      <DependentUpon>DVrach.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dobavlenie\DPacient.resx">
+      <DependentUpon>DPacient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="operac\DZapis.resx">
+      <DependentUpon>DZapis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="operac\RZapis.resx">
+      <DependentUpon>RZapis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="operac\Zapis.resx">
+      <DependentUpon>Zapis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Raspis\DelRaspisanie.resx">
+      <DependentUpon>DelRaspisanie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Raspis\DelVrem.resx">
+      <DependentUpon>DelVrem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Raspis\DRaspisanie.resx">
+      <DependentUpon>DRaspisanie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Raspis\DVrem.resx">
+      <DependentUpon>DVrem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Raspis\ERaspisanie.resx">
+      <DependentUpon>ERaspisanie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Raspis\EVrem.resx">
+      <DependentUpon>EVrem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Raspis\Raspisanie.resx">
+      <DependentUpon>Raspisanie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Redaktirovanie\RMedicament.resx">
+      <DependentUpon>RMedicament.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Redaktirovanie\ROborud.resx">
+      <DependentUpon>ROborud.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Redaktirovanie\RPacient.resx">
+      <DependentUpon>RPacient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Delete\DPacient.resx">
+      <DependentUpon>DPacient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Redaktirovanie\RPostavshik.resx">
+      <DependentUpon>RPostavshik.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Redaktirovanie\RSpisokdoljnostei.resx">
+      <DependentUpon>RSpisokdoljnostei.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Redaktirovanie\RUslugi.resx">
+      <DependentUpon>RUslugi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Redaktirovanie\RVrach.resx">
+      <DependentUpon>RVrach.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings\AlgoritmZarplat.resx">
+      <DependentUpon>AlgoritmZarplat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings\Skidka.resx">
+      <DependentUpon>Skidka.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings\StrokaPodk.resx">
+      <DependentUpon>StrokaPodk.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>Клиентский профиль .NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Установщик Windows 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
