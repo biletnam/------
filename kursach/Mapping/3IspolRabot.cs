@@ -9,7 +9,7 @@ using System.Configuration;
 namespace kursach
 {
     [Table]
-    public class IspolRabot
+    public class IspolPabot
     {
         [Column(IsPrimaryKey = true, IsDbGenerated = true)]
         public int ID;
@@ -22,19 +22,22 @@ namespace kursach
     }
     public class DB3 : DataContext
     {
-        public DB3(string cs) : base(cs) { }
-        public System.Data.Linq.Table<IspolRabot> IspolRabot
+        public DB3(string cs) : base(cs) { }       
+        public System.Data.Linq.Table<IspolPabot> IspolRabot
         {
-            get { return this.GetTable<IspolRabot>(); }
+            get { return this.GetTable<IspolPabot>(); }
         }
 
     }
     public class Met3
     {
         DB3 db3 = new DB3(kursach.Program.Pole.pole);
+        DB5 db5 = new DB5(kursach.Program.Pole.pole);
+        DB9 db9 = new DB9(kursach.Program.Pole.pole);
+        DB7 db7=new DB7(kursach.Program.Pole.pole);
         public void ADD(int IDRashodnika,int Kolichestvo,int IDRabot)
         {
-            IspolRabot pac = new IspolRabot();
+            IspolPabot pac = new IspolPabot();
             pac.IDRashodnika = IDRashodnika;
             pac.Kolichestvo = Kolichestvo;
             pac.IDRabot = IDRabot;
@@ -43,7 +46,7 @@ namespace kursach
         }
         public void Edit(int ID, int IDRashodnika, int Kolichestvo, int IDRabot)
         {
-            IspolRabot pac = db3.IspolRabot.Where(c => c.ID == ID).FirstOrDefault();
+            IspolPabot pac = db3.IspolRabot.Where(c => c.ID == ID).FirstOrDefault();
             pac.IDRashodnika = IDRashodnika;
             pac.Kolichestvo = Kolichestvo;
             pac.IDRabot = IDRabot;
@@ -51,9 +54,52 @@ namespace kursach
         }
         public void Delete(int ID)
         {
-            IspolRabot pac = db3.IspolRabot.Where(c => c.ID == ID).FirstOrDefault();
+            IspolPabot pac = db3.IspolRabot.Where(c => c.ID == ID).FirstOrDefault();
             db3.IspolRabot.DeleteOnSubmit(pac);
             db3.SubmitChanges();
         }
+        public bool prov_id2(int id)
+        {
+            bool pro = false;
+            var ec = from n in db9.Oborud
+                     select n;
+            foreach (var i in ec)
+            {
+                if (id == i.ID)
+                {
+                    pro = true;
+                }
+            }
+            return pro;
+        }
+        public bool prov_id(int id)
+        {
+            bool pro = false;
+            var ec = from n in db5.JurnalRabot
+                     select n;
+            foreach (var i in ec)
+            {
+                if (id == i.ID)
+                {
+                    pro = true;
+                }
+            }
+            return pro;
+        }
+        public bool prov_kol(int id,int kol)
+        {
+            bool pro = false;
+            var ec = from n in db7.Medicament
+                     select n;
+            foreach (var i in ec)
+            {
+                if (id == i.ID && i.Kol>=kol)
+                {
+                    pro = true;
+                }
+            }
+            return pro;
+        }
+
     }
 }

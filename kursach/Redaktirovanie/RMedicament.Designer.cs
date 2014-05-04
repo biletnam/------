@@ -181,10 +181,9 @@
             // 
             // button3
             // 
-            this.button3.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button3.Location = new System.Drawing.Point(177, 375);
+            this.button3.Location = new System.Drawing.Point(180, 375);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(80, 33);
+            this.button3.Size = new System.Drawing.Size(75, 33);
             this.button3.TabIndex = 20;
             this.button3.Text = "Показать";
             this.button3.UseVisualStyleBackColor = true;

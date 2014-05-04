@@ -48,6 +48,32 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="cli_basetypes, Version=1.0.20.0, Culture=neutral, PublicKeyToken=ce2cb7e279207b9e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Resources\cli_basetypes.dll</HintPath>
+    </Reference>
+    <Reference Include="cli_cppuhelper, Version=1.0.23.0, Culture=neutral, PublicKeyToken=ce2cb7e279207b9e, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Resources\cli_cppuhelper.dll</HintPath>
+    </Reference>
+    <Reference Include="cli_oootypes, Version=1.0.9.0, Culture=neutral, PublicKeyToken=ce2cb7e279207b9e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Resources\cli_oootypes.dll</HintPath>
+    </Reference>
+    <Reference Include="cli_uno">
+      <HintPath>..\Resources\cli_uno.dll</HintPath>
+    </Reference>
+    <Reference Include="cli_ure, Version=1.0.23.0, Culture=neutral, PublicKeyToken=ce2cb7e279207b9e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Resources\cli_ure.dll</HintPath>
+    </Reference>
+    <Reference Include="cli_uretypes, Version=1.0.9.0, Culture=neutral, PublicKeyToken=ce2cb7e279207b9e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Resources\cli_uretypes.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\..\..\..\..\..\Program Files\Microsoft Visual Studio 10.0\VC\lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -62,6 +88,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AktPdf.cs" />
+    <Compile Include="AktWriter.cs" />
     <Compile Include="Delete\DMedicament.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,11 +190,53 @@
     <Compile Include="Dobavlenie\DPacient.Designer.cs">
       <DependentUpon>DPacient.cs</DependentUpon>
     </Compile>
+    <Compile Include="operac\DRabot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="operac\DRabot.Designer.cs">
+      <DependentUpon>DRabot.cs</DependentUpon>
+    </Compile>
     <Compile Include="operac\DZapis.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="operac\DZapis.Designer.cs">
       <DependentUpon>DZapis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="operac\IMedic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="operac\IMedic.Designer.cs">
+      <DependentUpon>IMedic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="operac\IOborud.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="operac\IOborud.Designer.cs">
+      <DependentUpon>IOborud.cs</DependentUpon>
+    </Compile>
+    <Compile Include="operac\Rabot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="operac\Rabot.Designer.cs">
+      <DependentUpon>Rabot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="operac\RIMedic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="operac\RIMedic.Designer.cs">
+      <DependentUpon>RIMedic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="operac\RIOborud.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="operac\RIOborud.Designer.cs">
+      <DependentUpon>RIOborud.cs</DependentUpon>
+    </Compile>
+    <Compile Include="operac\RRabot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="operac\RRabot.Designer.cs">
+      <DependentUpon>RRabot.cs</DependentUpon>
     </Compile>
     <Compile Include="operac\RZapis.cs">
       <SubType>Form</SubType>
@@ -180,6 +250,7 @@
     <Compile Include="operac\Zapis.Designer.cs">
       <DependentUpon>Zapis.cs</DependentUpon>
     </Compile>
+    <Compile Include="OtpravkaEmail.cs" />
     <Compile Include="Raspis\DelRaspisanie.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -272,6 +343,8 @@
     <Compile Include="Redaktirovanie\RVrach.Designer.cs">
       <DependentUpon>RVrach.cs</DependentUpon>
     </Compile>
+    <Compile Include="SchetPdf.cs" />
+    <Compile Include="SchetWriter.cs" />
     <Compile Include="Settings\AlgoritmZarplat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -338,8 +411,29 @@
     <EmbeddedResource Include="Dobavlenie\DPacient.resx">
       <DependentUpon>DPacient.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="operac\DRabot.resx">
+      <DependentUpon>DRabot.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="operac\DZapis.resx">
       <DependentUpon>DZapis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="operac\IMedic.resx">
+      <DependentUpon>IMedic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="operac\IOborud.resx">
+      <DependentUpon>IOborud.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="operac\Rabot.resx">
+      <DependentUpon>Rabot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="operac\RIMedic.resx">
+      <DependentUpon>RIMedic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="operac\RIOborud.resx">
+      <DependentUpon>RIOborud.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="operac\RRabot.resx">
+      <DependentUpon>RRabot.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="operac\RZapis.resx">
       <DependentUpon>RZapis.cs</DependentUpon>

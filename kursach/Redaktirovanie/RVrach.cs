@@ -21,7 +21,7 @@ namespace kursach.Redaktirovanie
             try
             {
                 Met14 m = new Met14();
-                m.Edit(Convert.ToInt32(textBox1.Text), textBox2.Text, Convert.ToInt32(textBox3.Text), m.RaschetZarplat(Convert.ToInt32(textBox1.Text), Convert.ToInt32(textBox3.Text)), Convert.ToInt32(textBox6.Text), Convert.ToInt32(textBox4.Text), Convert.ToInt32(textBox5.Text));
+                m.Edit(Convert.ToInt32(textBox1.Text), textBox2.Text, Convert.ToInt32(textBox3.Text), m.RaschetZarplat2(Convert.ToInt32(textBox3.Text), Convert.ToInt32(textBox6.Text), Convert.ToInt32(textBox5.Text), Convert.ToInt32(textBox4.Text)), Convert.ToInt32(textBox6.Text), Convert.ToInt32(textBox4.Text), Convert.ToInt32(textBox5.Text));
                 this.Close();
             }
             catch (ArgumentOutOfRangeException) { MessageBox.Show("Не все поля заполнены"); }

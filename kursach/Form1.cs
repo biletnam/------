@@ -323,6 +323,7 @@ namespace kursach
                 panel1.Controls.Add(treeView1);
                 DataGridView dataGridView1 = new DataGridView();
                 dataGridView1.AutoSize = true;
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                 dataGridView1.Location = new Point(150, 28);
                 dataGridView1.DataMember = "Table";
                 panel1.Controls.Add(dataGridView1);
@@ -366,6 +367,7 @@ namespace kursach
             panel1.Controls.Add(treeView1);
             DataGridView dataGridView1 = new DataGridView();
             dataGridView1.AutoSize = true;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridView1.Location = new Point(150, 28);
             dataGridView1.DataMember = "Table";
             panel1.Controls.Add(dataGridView1);
@@ -410,6 +412,7 @@ namespace kursach
             panel1.Controls.Add(treeView1);
             DataGridView dataGridView1 = new DataGridView();
             dataGridView1.AutoSize = true;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridView1.Location = new Point(150, 28);
             dataGridView1.DataMember = "Table";
             panel1.Controls.Add(dataGridView1);
@@ -425,7 +428,8 @@ namespace kursach
         //Вкладка Медикаменты
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
-            try{
+            try
+            {
             n = 4;
             panel1.Controls.Clear();
             //Добавление контейнера        
@@ -450,6 +454,7 @@ namespace kursach
             panel1.Controls.Add(treeView1);
             DataGridView dataGridView1 = new DataGridView();
             dataGridView1.AutoSize = true;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridView1.Location = new Point(150, 28);
             dataGridView1.DataMember = "Table";
             panel1.Controls.Add(dataGridView1);
@@ -493,6 +498,7 @@ namespace kursach
             panel1.Controls.Add(treeView1);
             DataGridView dataGridView1 = new DataGridView();
             dataGridView1.AutoSize = true;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridView1.Location = new Point(150, 28);
             dataGridView1.DataMember = "Table";
             panel1.Controls.Add(dataGridView1);
@@ -532,6 +538,7 @@ namespace kursach
             panel1.Controls.Add(treeView1);
             DataGridView dataGridView1 = new DataGridView();
             dataGridView1.AutoSize = true;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridView1.Location = new Point(150, 28);
             dataGridView1.DataMember = "Table";
             panel1.Controls.Add(dataGridView1);
@@ -570,6 +577,7 @@ namespace kursach
             panel1.Controls.Add(treeView1);
             DataGridView dataGridView1 = new DataGridView();
             dataGridView1.AutoSize = true;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridView1.Location = new Point(150, 28);
             dataGridView1.DataMember = "Table";
             panel1.Controls.Add(dataGridView1);
@@ -613,6 +621,7 @@ namespace kursach
             panel1.Controls.Add(treeView1);
             DataGridView dataGridView1 = new DataGridView();
             dataGridView1.AutoSize = true;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridView1.Location = new Point(230, 28);
             dataGridView1.DataMember = "Table";
             panel1.Controls.Add(dataGridView1);
@@ -637,10 +646,11 @@ namespace kursach
             catch { MessageBox.Show("Error"); }
         }
 
-
+        int temp;
         //Вкладка запись на прием
         private void toolStripMenuItem10_Click(object sender, EventArgs e)
         {
+            temp = 1;
             panel1.Controls.Clear();
             //Добавление контейнера        
             panel1.AutoScroll = true;
@@ -667,30 +677,222 @@ namespace kursach
             panel1.Controls.Add(button3);
             DataGridView dataGridView1 = new DataGridView();
             dataGridView1.AutoSize = true;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridView1.Location = new Point(0, 59);
             dataGridView1.DataMember = "Table";
             panel1.Controls.Add(dataGridView1);
             //Свяжите DataGridView к BindingSource И загрузить данные из базы данных.
             dataGridView1.DataSource = bindingSource1;
             GetData("select * from Zapis");
-             
+            dataGridView1.Columns[1].HeaderText = "ID пациента";
+            dataGridView1.Columns[2].HeaderText = "ID врача";
+            dataGridView1.Columns[3].HeaderText = "ID услуги";
+            dataGridView1.Columns[4].HeaderText = "Дата";
+            dataGridView1.Columns[5].HeaderText = "Время";
         }
-        //Запись, добавление удаление на прием
+        //Данные о выполненной работе
+        private void toolStripMenuItem19_Click(object sender, EventArgs e)
+        {
+            temp = 2;
+            panel1.Controls.Clear();
+            //Добавление контейнера        
+            panel1.AutoScroll = true;
+            panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel1.Dock = DockStyle.Fill;
+            this.Controls.Add(panel1);
+            Button button = new Button();
+            button.Text = "Записать работу";
+            button.Location = new Point(0, 28);
+            button.Width = 200;
+            button.Click += new System.EventHandler(button_Click);
+            panel1.Controls.Add(button);
+            Button button2 = new Button();
+            button2.Text = "Редактировать запись";
+            button2.Location = new Point(200, 28);
+            button2.Width = 200;
+            button2.Click += new System.EventHandler(button2_Click);
+            panel1.Controls.Add(button2);
+            Button button3 = new Button();
+            button3.Text = "Удалить запись";
+            button3.Location = new Point(400, 28);
+            button3.Width = 200;
+            button3.Click += new System.EventHandler(button3_Click);
+            panel1.Controls.Add(button3);
+            DataGridView dataGridView1 = new DataGridView();
+            dataGridView1.AutoSize = true;
+            dataGridView1.AutoSizeColumnsMode =  DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridView1.Location = new Point(0, 59);
+            dataGridView1.DataMember = "Table";
+            panel1.Controls.Add(dataGridView1);
+            //Свяжите DataGridView к BindingSource И загрузить данные из базы данных.
+            dataGridView1.DataSource = bindingSource1;
+            GetData("select * from JurnalRabot");
+            dataGridView1.Columns[1].HeaderText = "ID записи";
+            dataGridView1.Columns[2].HeaderText = "Цена";
+            dataGridView1.Columns[3].HeaderText = "Скидка";
+            dataGridView1.Columns[4].HeaderText = "Итого";
+        }
+        //Акт выполненных работ
+        CheckBox cb = new CheckBox();
+        CheckBox cb2 = new CheckBox();
+        TextBox t = new TextBox();
+      public  SaveFileDialog sfd = new SaveFileDialog();
+         private void toolStripMenuItem20_Click(object sender, EventArgs e)
+        {
+            temp = 3;
+            panel1.Controls.Clear();
+            //Добавление контейнера        
+            panel1.AutoScroll = true;
+            panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel1.Dock = DockStyle.Fill;
+            this.Controls.Add(panel1);
+            cb.Text = "Сформировать акт в PDf";
+            cb.Location = new Point(40, 40);
+            cb.Width = 300;
+            panel1.Controls.Add(cb);             
+            cb2.Text = "Сформировать акт в writter";
+            cb2.Location = new Point(40, 80);
+            cb2.Width = 300;
+            panel1.Controls.Add(cb2);
+            Label l = new Label();
+            l.Text = "Введите номер работ";
+            l.Location = new Point(40, 120);
+            l.Width = 300;
+            panel1.Controls.Add(l);
+            
+            t.Location = new Point(40, 160);
+            t.Width = 300;
+            panel1.Controls.Add(t);
+            Button button = new Button();
+            button.Text = "Создать акт работ";
+            button.Location = new Point(40, 200);
+            button.Width = 300;
+            button.Click += new System.EventHandler(button_Click);
+            panel1.Controls.Add(button);
+        }
+        //Счет выполненных работ
+        private void toolStripMenuItem21_Click(object sender, EventArgs e)
+        {
+            temp = 4;
+            panel1.Controls.Clear();
+            //Добавление контейнера        
+            panel1.AutoScroll = true;
+            panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel1.Dock = DockStyle.Fill;
+            this.Controls.Add(panel1);
+            cb.Text = "Сформировать счет в PDf";
+            cb.Location = new Point(40, 40);
+            cb.Width = 300;
+            panel1.Controls.Add(cb);
+            cb2.Text = "Сформировать счет в writter";
+            cb2.Location = new Point(40, 80);
+            cb2.Width = 300;
+            panel1.Controls.Add(cb2);
+            Label l = new Label();
+            l.Text = "Введите номер работ";
+            l.Location = new Point(40, 120);
+            l.Width = 300;
+            panel1.Controls.Add(l);
+
+            t.Location = new Point(40, 160);
+            t.Width = 300;
+            panel1.Controls.Add(t);
+            Button button = new Button();
+            button.Text = "Создать счет работ";
+            button.Location = new Point(40, 200);
+            button.Width = 300;
+            button.Click += new System.EventHandler(button_Click);
+            panel1.Controls.Add(button);
+        }
+        //Запись, добавление удаление на прием и выполнение
         private void button_Click(object sender, EventArgs e)
         {
-            operac.Zapis f = new operac.Zapis();
-            f.ShowDialog(); // показываем  
+            try{
+                switch (temp)
+                {
+                    case 1:
+                        operac.Zapis f = new operac.Zapis();
+                        f.ShowDialog(); // показываем  
+                        GetData(dataAdapter.SelectCommand.CommandText);
+                        break;
+                    case 2:
+                        operac.Rabot f2 = new operac.Rabot();
+                        GetData(dataAdapter.SelectCommand.CommandText);
+                        f2.ShowDialog(); // показываем  
+                        break;
+                    case 3:Met5 m = new Met5();
+                        if(m.prov_id2(Convert.ToInt32(t.Text))){ 
+                            if (cb.Checked == true) 
+                    {
+                        
+                        sfd.Filter = "PDF Document|*.pdf";
+                        sfd.ShowDialog();
+                        AktPdf a = new AktPdf();
+                        a.CozdAktPdf(sfd.FileName,Convert.ToInt32(t.Text));
+                        
+                    }
+                        if (cb2.Checked == true) 
+                        {
+                            string push = @"D:\Akt.odt";
+                            AktWriter a = new AktWriter();
+                            a.CozdAktWriter(push, Convert.ToInt32(t.Text));
+                        }}else {MessageBox.Show("ID не существует");}
+                        break;
+                    case 4:
+                        Met5 m2 = new Met5();
+                        if (m2.prov_id2(Convert.ToInt32(t.Text)))
+                            {
+                        if (cb.Checked == true)
+                        {                                                        
+                                sfd.Filter = "PDF Document|*.pdf";
+                                sfd.ShowDialog();
+                                SchetPdf a = new SchetPdf();
+                                a.CozdSchetPdf(sfd.FileName, Convert.ToInt32(t.Text));
+                            }
+                            if (cb2.Checked == true) 
+                        {
+                            string push = @"D:\Schet.odt";
+                            SchetWriter a = new SchetWriter();
+                            a.CozdSchetWriter(push, Convert.ToInt32(t.Text));
+                        }
+                        }else { MessageBox.Show("ID не существует"); }
+                        break;
+                }
+            }catch(ArgumentOutOfRangeException){MessageBox.Show("Не все поля заполнены");}
+            
         }
         private void button2_Click(object sender, EventArgs e)
         {
+            switch(temp)
+            {
+                case 1:
             operac.RZapis f = new operac.RZapis();
             f.ShowDialog(); // показываем  
+                    break;
+                case 2: 
+                    operac.RRabot f2 = new operac.RRabot();
+                    f2.ShowDialog(); // показываем  
+                    break;
+            }
+            GetData(dataAdapter.SelectCommand.CommandText);
         }
         private void button3_Click(object sender, EventArgs e)
         {
+            switch(temp)
+            {
+                case 1:
             operac.DZapis f = new operac.DZapis();
             f.ShowDialog(); // показываем  
+            break;
+                case 2: 
+                    operac.DRabot f2 = new operac.DRabot();
+                    f2.ShowDialog(); // показываем
+                    break;
+            }
+            GetData(dataAdapter.SelectCommand.CommandText);
         }
+        
+        
 
         //Задать строку подключения
         private void toolStripMenuItem16_Click(object sender, EventArgs e)
@@ -716,5 +918,11 @@ namespace kursach
             Settings.Skidka f = new Settings.Skidka();
             f.ShowDialog(); // показываем
         }
+
+        
+
+       
+
+        
     }
 }

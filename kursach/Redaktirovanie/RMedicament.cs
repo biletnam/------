@@ -24,6 +24,7 @@ namespace kursach.Redaktirovanie
                 if (m.prov_id(Convert.ToInt32(textBox3.Text)) == true)
                 { 
                 m.Edit(Convert.ToInt32(textBox7.Text), textBox1.Text, Convert.ToInt32(textBox2.Text),Convert.ToInt32(textBox3.Text),Convert.ToInt32(textBox4.Text),Convert.ToInt32(textBox5.Text),Convert.ToInt32(textBox6.Text));
+                m.Poisk_min();
                 this.Close();
                 }
                 else { MessageBox.Show("ID поставщика не существует"); }
@@ -42,11 +43,13 @@ namespace kursach.Redaktirovanie
             {
                 textBox1.Text = i.Name;
                 textBox2.Text = i.Kol.ToString();
-                textBox1.Text = i.IDPost.ToString();
-                textBox2.Text = i.Min.ToString();
-                textBox1.Text = i.CenazaEd.ToString();
-                textBox2.Text = i.Zak.ToString();
+                textBox3.Text = i.IDPost.ToString();
+                textBox4.Text = i.Min.ToString();
+                textBox5.Text = i.CenazaEd.ToString();
+                textBox6.Text = i.Zak.ToString();
             }
         }
+
+       
     }
 }

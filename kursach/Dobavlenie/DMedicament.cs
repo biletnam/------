@@ -24,6 +24,7 @@ namespace kursach.Dobavlenie
                 if (d.prov_id(Convert.ToInt32(textBox3.Text)) == true)
                 {
                     d.ADD(textBox1.Text, Convert.ToInt32(textBox2.Text),Convert.ToInt32(textBox3.Text),Convert.ToInt32(textBox4.Text),Convert.ToInt32(textBox5.Text),Convert.ToInt32(textBox6.Text));
+                    d.Poisk_min();
                     this.Close();
                 }
                 else { MessageBox.Show("ID поставщика не существует"); }

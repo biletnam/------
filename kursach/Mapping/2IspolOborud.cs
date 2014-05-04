@@ -29,6 +29,8 @@ namespace kursach
     }
     public class Met2
     {
+        DB5 db5=new DB5(kursach.Program.Pole.pole);
+        DB9 db9=new DB9(kursach.Program.Pole.pole);
         DB2 db2 = new DB2(kursach.Program.Pole.pole);
         public void ADD(int IDRabot,int IDMedicamenta)
         {
@@ -50,6 +52,34 @@ namespace kursach
             IspolOborud pac = db2.IspolOborud.Where(c => c.ID == ID).FirstOrDefault();
             db2.IspolOborud.DeleteOnSubmit(pac);
             db2.SubmitChanges();
+        }
+        public bool prov_id(int id)
+        {
+            bool pro = false;
+            var ec = from n in db5.JurnalRabot
+                     select n;
+            foreach (var i in ec)
+            {
+                if (id == i.ID)
+                {
+                    pro = true;
+                }
+            }
+            return pro;
+        }
+        public bool prov_id2(int id)
+        {
+            bool pro = false;
+            var ec = from n in db9.Oborud
+                     select n;
+            foreach (var i in ec)
+            {
+                if (id == i.ID)
+                {
+                    pro = true;
+                }
+            }
+            return pro;
         }
     }
 }
