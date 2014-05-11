@@ -34,6 +34,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -70,24 +72,40 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 59);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 19);
+            this.label2.Size = new System.Drawing.Size(49, 19);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Оклад за час";
+            this.label2.Text = "Оклад";
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(16, 31);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(232, 25);
+            this.textBox1.Size = new System.Drawing.Size(239, 25);
             this.textBox1.TabIndex = 4;
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(16, 81);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(232, 25);
+            this.textBox2.Size = new System.Drawing.Size(133, 25);
             this.textBox2.TabIndex = 4;
             this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(155, 59);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 19);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Ден. ед.";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(155, 81);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 25);
+            this.textBox3.TabIndex = 6;
             // 
             // DSpisokDoljnostei
             // 
@@ -97,6 +115,8 @@
             this.CancelButton = this.button2;
             this.ClientSize = new System.Drawing.Size(284, 151);
             this.ControlBox = false;
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
@@ -118,5 +138,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox3;
     }
 }

@@ -15,10 +15,15 @@ namespace kursach
         {
             InitializeComponent();
         }
-
+        DB1 db1 = new DB1(kursach.Program.Pole.pole);
         private void Form4_Load(object sender, EventArgs e)
         {
-
+            var ec = from n2 in db1.Pacient
+                     select n2;
+            foreach (var i in ec)
+            {
+                comboBox1.Items.Add(i.FIO);
+            }
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -37,7 +42,7 @@ namespace kursach
             try
             {
                 Met1 m = new Met1();
-                m.Delete(Convert.ToInt32(textBox1.Text));
+                m.Delete(comboBox1.Items[comboBox1.SelectedIndex].ToString());
                 this.Close();
             }
             catch { MessageBox.Show("Error"); }

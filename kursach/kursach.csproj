@@ -74,8 +74,16 @@
     <Reference Include="itextsharp">
       <HintPath>..\..\..\..\..\..\Program Files\Microsoft Visual Studio 10.0\VC\lib\itextsharp.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\Resources\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="OpenPop">
+      <HintPath>..\Resources\OpenPop.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
@@ -88,8 +96,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AktPdf.cs" />
-    <Compile Include="AktWriter.cs" />
+    <Compile Include="Akt_Schet\AktPdf.cs" />
+    <Compile Include="Akt_Schet\AktWriter.cs" />
     <Compile Include="Delete\DMedicament.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +170,25 @@
     <Compile Include="Dobavlenie\DVrach.Designer.cs">
       <DependentUpon>DVrach.cs</DependentUpon>
     </Compile>
+    <Compile Include="EmailPriem.cs" />
+    <Compile Include="Settings\Firma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings\Firma.Designer.cs">
+      <DependentUpon>Firma.cs</DependentUpon>
+    </Compile>
+    <Compile Include="operac\Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="operac\Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="operac\Form5.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="operac\Form5.Designer.cs">
+      <DependentUpon>Form5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mapping\10Postavshik.cs" />
     <Compile Include="Mapping\11Raspisanie.cs" />
     <Compile Include="Mapping\12SpisokDoljnostei.cs" />
@@ -169,6 +196,7 @@
     <Compile Include="Mapping\14Vrach.cs" />
     <Compile Include="Mapping\15Vrem.cs" />
     <Compile Include="Mapping\16Zapis.cs" />
+    <Compile Include="Mapping\17Firma.cs" />
     <Compile Include="Mapping\1Pacient.cs" />
     <Compile Include="Mapping\2IspolOborud.cs" />
     <Compile Include="Mapping\3IspolRabot.cs" />
@@ -250,7 +278,13 @@
     <Compile Include="operac\Zapis.Designer.cs">
       <DependentUpon>Zapis.cs</DependentUpon>
     </Compile>
-    <Compile Include="OtpravkaEmail.cs" />
+    <Compile Include="Otchets\OtchetExel.cs" />
+    <Compile Include="Otchets\OtchetForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Otchets\OtchetForm.Designer.cs">
+      <DependentUpon>OtchetForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Raspis\DelRaspisanie.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -343,8 +377,8 @@
     <Compile Include="Redaktirovanie\RVrach.Designer.cs">
       <DependentUpon>RVrach.cs</DependentUpon>
     </Compile>
-    <Compile Include="SchetPdf.cs" />
-    <Compile Include="SchetWriter.cs" />
+    <Compile Include="Akt_Schet\SchetPdf.cs" />
+    <Compile Include="Akt_Schet\SchetWriter.cs" />
     <Compile Include="Settings\AlgoritmZarplat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -368,6 +402,18 @@
     </Compile>
     <Compile Include="Settings\StrokaPodk.Designer.cs">
       <DependentUpon>StrokaPodk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VoprosOtpravka.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VoprosOtpravka.Designer.cs">
+      <DependentUpon>VoprosOtpravka.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Zakupat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Zakupat.Designer.cs">
+      <DependentUpon>Zakupat.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Delete\DMedicament.resx">
       <DependentUpon>DMedicament.cs</DependentUpon>
@@ -405,11 +451,20 @@
     <EmbeddedResource Include="Dobavlenie\DVrach.resx">
       <DependentUpon>DVrach.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Settings\Firma.resx">
+      <DependentUpon>Firma.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dobavlenie\DPacient.resx">
       <DependentUpon>DPacient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="operac\Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="operac\Form5.resx">
+      <DependentUpon>Form5.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="operac\DRabot.resx">
       <DependentUpon>DRabot.cs</DependentUpon>
@@ -440,6 +495,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="operac\Zapis.resx">
       <DependentUpon>Zapis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Otchets\OtchetForm.resx">
+      <DependentUpon>OtchetForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Raspis\DelRaspisanie.resx">
       <DependentUpon>DelRaspisanie.cs</DependentUpon>
@@ -507,6 +565,12 @@
     <EmbeddedResource Include="Settings\StrokaPodk.resx">
       <DependentUpon>StrokaPodk.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="VoprosOtpravka.resx">
+      <DependentUpon>VoprosOtpravka.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Zakupat.resx">
+      <DependentUpon>Zakupat.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -534,7 +598,16 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\EmailOtpravka\EmailOtpravka\Email.csproj">
+      <Project>{21727881-A94C-4110-A146-8E7AA1C3E2C4}</Project>
+      <Name>Email</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RabotaSFailami\RabotaSFailami\RabotaSFailami.csproj">
+      <Project>{1CDDC3B1-D1BD-4816-8D4C-FC503AC09023}</Project>
+      <Name>RabotaSFailami</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

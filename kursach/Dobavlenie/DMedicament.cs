@@ -15,19 +15,22 @@ namespace kursach.Dobavlenie
         {
             InitializeComponent();
         }
-
+        int temp = 0;
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
                 Met7 d = new Met7();
-                if (d.prov_id(Convert.ToInt32(textBox3.Text)) == true)
+                var ec = from n2 in db10.Postavshik
+                         where n2.Name == comboBox1.Items[comboBox1.SelectedIndex].ToString()
+                         select n2;
+                foreach (var i in ec)
                 {
-                    d.ADD(textBox1.Text, Convert.ToInt32(textBox2.Text),Convert.ToInt32(textBox3.Text),Convert.ToInt32(textBox4.Text),Convert.ToInt32(textBox5.Text),Convert.ToInt32(textBox6.Text));
+                    temp = i.ID;
+                }
+                d.ADD(textBox1.Text, Convert.ToInt32(textBox2.Text), temp, Convert.ToInt32(textBox4.Text), Convert.ToInt32(textBox5.Text), Convert.ToInt32(textBox6.Text),textBox7.Text,textBox8.Text);
                     d.Poisk_min();
                     this.Close();
-                }
-                else { MessageBox.Show("ID поставщика не существует"); }
             }
             catch (ArgumentOutOfRangeException) { MessageBox.Show("Не все поля заполнены"); }
             catch { MessageBox.Show("Error"); }
@@ -85,6 +88,17 @@ namespace kursach.Dobavlenie
                 {
                     e.Handled = true;
                 }
+            }
+        }
+        DB7 db = new DB7(kursach.Program.Pole.pole);
+        DB10 db10 = new DB10(kursach.Program.Pole.pole);
+        private void DMedicament_Load(object sender, EventArgs e)
+        {
+            var ec = from n2 in db10.Postavshik
+                     select n2;
+            foreach (var i in ec)
+            {
+                comboBox1.Items.Add(i.Name);
             }
         }
     }

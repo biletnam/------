@@ -23,6 +23,8 @@ namespace kursach.Settings
 
         private void AlgoritmZarplat_Load(object sender, EventArgs e)
         {
+            RabotaSFailami.RabotaSFailami rsf = new RabotaSFailami.RabotaSFailami();
+            label1.Text ="Нынешняя оплата труда "+ rsf.outFile(Application.StartupPath.ToString() + "\\FormOplata.txt");
             groupBox3.Visible = false;
             groupBox4.Visible = false;
         }
@@ -60,9 +62,11 @@ namespace kursach.Settings
             }            
             try
             {
+                Met14 m=new Met14();
                 System.IO.StreamWriter writer = new System.IO.StreamWriter(Application.StartupPath.ToString() + "\\FormOplata.txt");
                 writer.WriteLine(n);
                 writer.Close();
+                m.RaschetZarplat();
                 this.Close();
             }
             catch { MessageBox.Show("Error"); }

@@ -21,7 +21,7 @@ namespace kursach.Delete
             try
             {
                 Met14 m = new Met14();
-                m.Delete(Convert.ToInt32(textBox1.Text));
+                m.Delete(comboBox1.Items[comboBox1.SelectedIndex].ToString());
                 this.Close();
             }
             catch { MessageBox.Show("Error"); }
@@ -35,6 +35,16 @@ namespace kursach.Delete
                 {
                     e.Handled = true;
                 }
+            }
+        }
+        DB14 db14 = new DB14(kursach.Program.Pole.pole);
+        private void DVrach_Load(object sender, EventArgs e)
+        {
+            var ec = from n2 in db14.Vrach
+                     select n2;
+            foreach (var i in ec)
+            {
+                comboBox1.Items.Add(i.FIO);
             }
         }
     }

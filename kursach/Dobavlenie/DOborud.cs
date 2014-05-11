@@ -21,12 +21,16 @@ namespace kursach.Dobavlenie
             try
             {
                 Met9 d = new Met9();
-                if (d.prov_id(Convert.ToInt32(textBox3.Text)) == true)
+                var ec = from n2 in db10.Postavshik
+                         where n2.Name == comboBox1.Items[comboBox1.SelectedIndex].ToString()
+                         select n2;
+                int temp = 0;
+                foreach (var i in ec)
                 {
-                    d.ADD(textBox1.Text, Convert.ToInt32(textBox2.Text),Convert.ToInt32(textBox3.Text));
-                    this.Close();
+                    temp = i.ID;
                 }
-                else { MessageBox.Show("ID поставщика не существует"); }
+                    d.ADD(textBox1.Text, Convert.ToInt32(textBox2.Text),temp,textBox3.Text);
+                    this.Close();
             }
             catch (ArgumentOutOfRangeException) { MessageBox.Show("Не все поля заполнены"); }
             catch { MessageBox.Show("Error"); }
@@ -51,6 +55,16 @@ namespace kursach.Dobavlenie
                 {
                     e.Handled = true;
                 }
+            }
+        }
+        DB10 db10 = new DB10(kursach.Program.Pole.pole);
+        private void DOborud_Load(object sender, EventArgs e)
+        {
+            var ec = from n2 in db10.Postavshik
+                     select n2;
+            foreach (var i in ec)
+            {
+                comboBox1.Items.Add(i.Name);
             }
         }
     }

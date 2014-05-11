@@ -1,0 +1,4 @@
+C:\Users\silvestor\Desktop\OOP\kursach\RabotaSFailami\RabotaSFailami\bin\Debug\RabotaSFailami.dll
+C:\Users\silvestor\Desktop\OOP\kursach\RabotaSFailami\RabotaSFailami\bin\Debug\RabotaSFailami.pdb
+C:\Users\silvestor\Desktop\OOP\kursach\RabotaSFailami\RabotaSFailami\obj\Debug\RabotaSFailami.dll
+C:\Users\silvestor\Desktop\OOP\kursach\RabotaSFailami\RabotaSFailami\obj\Debug\RabotaSFailami.pdb

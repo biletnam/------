@@ -21,6 +21,7 @@ namespace kursach
                 DB1 db1 = new DB1(kursach.Program.Pole.pole);
                 DB14 db14 = new DB14(kursach.Program.Pole.pole);
                 DB13 db13 = new DB13(kursach.Program.Pole.pole);
+                Mapping.DB17 db17 = new Mapping.DB17(kursach.Program.Pole.pole);
                 var ec = from n in db.JurnalRabot
                          where n.ID == Convert.ToInt32(ID)
                          select n;
@@ -29,6 +30,9 @@ namespace kursach
                 var ec2 = from n in db2.Zapis
                           where n.ID == temp
                           select n;
+                var Firma = from n in db17.Firma
+                            where n.ID == 1
+                            select n;
                 string temp2 = "";
                 foreach (var i in ec2) { temp2 = i.Data; }
                 var doc = new Document();
@@ -52,34 +56,41 @@ namespace kursach
                 doc.Add(a2);
                 PdfPTable table2 = new PdfPTable(3);
                 table2.WidthPercentage = 100;
-                PdfPCell cell8 = new PdfPCell(new Phrase("ИНН 1234567", new iTextSharp.text.Font(basefont, 14, iTextSharp.text.Font.NORMAL, new BaseColor(Color.Black))));
-                cell8.BackgroundColor = new BaseColor(Color.White);
-                cell8.HorizontalAlignment = Element.ALIGN_CENTER;
-                PdfPCell cell9 = new PdfPCell(new Phrase("КПП 1234567", new iTextSharp.text.Font(basefont, 14, iTextSharp.text.Font.NORMAL, new BaseColor(Color.Black))));
-                PdfPCell cell10 = new PdfPCell(new Phrase("", new iTextSharp.text.Font(basefont, 14, iTextSharp.text.Font.NORMAL, new BaseColor(Color.Black))));
-                table2.AddCell(cell8);
-                table2.AddCell(cell9);
-                table2.AddCell(cell10);                
-                PdfPCell cell11 = new PdfPCell(new Phrase("Получатель Клиника стоматалогии", new iTextSharp.text.Font(basefont, 14, iTextSharp.text.Font.NORMAL, new BaseColor(Color.Black))));
-                PdfPCell cell12 = new PdfPCell(new Phrase("Счет №", new iTextSharp.text.Font(basefont, 14, iTextSharp.text.Font.NORMAL, new BaseColor(Color.Black))));
-                PdfPCell cell13 = new PdfPCell(new Phrase("1234567", new iTextSharp.text.Font(basefont, 14, iTextSharp.text.Font.NORMAL, new BaseColor(Color.Black))));
-                PdfPCell cell14 = new PdfPCell(new Phrase("Банк получателя ", new iTextSharp.text.Font(basefont, 14, iTextSharp.text.Font.NORMAL, new BaseColor(Color.Black))));
-                PdfPCell cell15 = new PdfPCell(new Phrase("Счет № ", new iTextSharp.text.Font(basefont, 14, iTextSharp.text.Font.NORMAL, new BaseColor(Color.Black))));
-                PdfPCell cell16 = new PdfPCell(new Phrase("1234567 ", new iTextSharp.text.Font(basefont, 14, iTextSharp.text.Font.NORMAL, new BaseColor(Color.Black))));
+                foreach (var i in Firma)
+                {
+                    PdfPCell cell8 = new PdfPCell(new Phrase("ИНН "+i.INN, new iTextSharp.text.Font(basefont, 14, iTextSharp.text.Font.NORMAL, new BaseColor(Color.Black))));
+                    cell8.BackgroundColor = new BaseColor(Color.White);
+                    cell8.HorizontalAlignment = Element.ALIGN_CENTER;
+                    PdfPCell cell9 = new PdfPCell(new Phrase("КПП "+i.KPP, new iTextSharp.text.Font(basefont, 14, iTextSharp.text.Font.NORMAL, new BaseColor(Color.Black))));
+                    PdfPCell cell10 = new PdfPCell(new Phrase("", new iTextSharp.text.Font(basefont, 14, iTextSharp.text.Font.NORMAL, new BaseColor(Color.Black))));
+                    table2.AddCell(cell8);
+                    table2.AddCell(cell9);
+                    table2.AddCell(cell10);
+                    PdfPCell cell11 = new PdfPCell(new Phrase("Получатель "+i.Name, new iTextSharp.text.Font(basefont, 14, iTextSharp.text.Font.NORMAL, new BaseColor(Color.Black))));
+                    PdfPCell cell12 = new PdfPCell(new Phrase("Счет №", new iTextSharp.text.Font(basefont, 14, iTextSharp.text.Font.NORMAL, new BaseColor(Color.Black))));
+                    PdfPCell cell13 = new PdfPCell(new Phrase(i.Schet, new iTextSharp.text.Font(basefont, 14, iTextSharp.text.Font.NORMAL, new BaseColor(Color.Black))));
+                    PdfPCell cell14 = new PdfPCell(new Phrase("Банк получателя "+i.Bank, new iTextSharp.text.Font(basefont, 14, iTextSharp.text.Font.NORMAL, new BaseColor(Color.Black))));
+                    PdfPCell cell15 = new PdfPCell(new Phrase("Счет № ", new iTextSharp.text.Font(basefont, 14, iTextSharp.text.Font.NORMAL, new BaseColor(Color.Black))));
+                    PdfPCell cell16 = new PdfPCell(new Phrase(i.SchetBank, new iTextSharp.text.Font(basefont, 14, iTextSharp.text.Font.NORMAL, new BaseColor(Color.Black))));
+                    table2.AddCell(cell11);
+                    table2.AddCell(cell12);
+                    table2.AddCell(cell13);
+                    table2.AddCell(cell14);
+                    table2.AddCell(cell15);
+                    table2.AddCell(cell16);
+                }
                 
-                table2.AddCell(cell11);
-                table2.AddCell(cell12);
-                table2.AddCell(cell13);
-                table2.AddCell(cell14);
-                table2.AddCell(cell15);
-                table2.AddCell(cell16);
                 doc.Add(table2);
                 Paragraph a3 = new Paragraph();
-                foreach (var i in ec2) { temp = i.IDVracha; }
-                var ec4 = from n in db14.Vrach
-                          where n.ID == temp
-                          select n;
-                foreach (var i in ec4) { temp2 = i.FIO; }
+                DB11 db11 = new DB11(kursach.Program.Pole.pole);
+                var Raspisanie = from n in db11.Raspisanie
+                                 where n.ID == temp
+                                 select n;
+                foreach (var i in Raspisanie) { temp = i.IDVrach; }
+                var Vrach = from n in db14.Vrach
+                            where n.ID == temp
+                            select n;
+                foreach (var i in Vrach) { temp2 = i.FIO; }
                 a3.Add(new Phrase("Исполнитель: " + temp2, new iTextSharp.text.Font(basefont, 14, iTextSharp.text.Font.NORMAL, new BaseColor(Color.Black))));
                 a3.Alignment = Element.ALIGN_LEFT;
                 a3.SpacingAfter = 5;
@@ -134,9 +145,12 @@ namespace kursach
                 a4.Add(Environment.NewLine);
                 a4.Add(Environment.NewLine);                
                 string temp3 = "";
-                foreach (var i in ec4) { temp2 = i.FIO; }
+                foreach (var i in Vrach) { temp2 = i.FIO; }
                 foreach (var i in ec3) { temp3 = i.FIO; }
-                a4.Add(new Phrase("Исполнитель:________________________ " + temp2 + Environment.NewLine + Environment.NewLine + "Бухгалтер: ________________________" , new iTextSharp.text.Font(basefont, 14, iTextSharp.text.Font.ITALIC, new BaseColor(Color.Black))));
+                foreach (var i in Firma)
+                {
+                    a4.Add(new Phrase("Исполнитель:________________________ " + temp2 + Environment.NewLine + Environment.NewLine + "Бухгалтер: ________________________"+i.Buh, new iTextSharp.text.Font(basefont, 14, iTextSharp.text.Font.ITALIC, new BaseColor(Color.Black))));
+                }
                 a4.Add(Environment.NewLine);
                 doc.Add(a4);
                 doc.Close();

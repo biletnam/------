@@ -40,11 +40,15 @@ namespace kursach
 
             unoidl.com.sun.star.text.XTextRange x = ((unoidl.com.sun.star.text.XTextDocument)xComponent).getText().getEnd();  // в конец
             ((unoidl.com.sun.star.text.XTextDocument)xComponent).getText().insertString(x, "от " + temp2 + "г." + Environment.NewLine + Environment.NewLine + Environment.NewLine, true);
-            foreach (var i in ec2) { temp = i.IDVracha; }
-            var ec4 = from n in db14.Vrach
-                      where n.ID == temp
-                      select n;
-            foreach (var i in ec4) { temp2 = i.FIO; }
+            DB11 db11 = new DB11(kursach.Program.Pole.pole);
+            var Raspisanie = from n in db11.Raspisanie
+                             where n.ID == temp
+                             select n;
+            foreach (var i in Raspisanie) { temp = i.IDVrach; }
+            var Vrach = from n in db14.Vrach
+                        where n.ID == temp
+                        select n;
+            foreach (var i in Vrach) { temp2 = i.FIO; }            
             unoidl.com.sun.star.text.XTextRange x2 = ((unoidl.com.sun.star.text.XTextDocument)xComponent).getText().getEnd();  // в конец
             ((unoidl.com.sun.star.text.XTextDocument)xComponent).getText().insertString(x2, "Исполнитель: " + temp2 + Environment.NewLine , true);
 
@@ -152,7 +156,7 @@ xDispatchHelper.executeDispatch((XDispatchProvider)frame, ".uno:InsertText", "",
 unoidl.com.sun.star.text.XTextRange x4 = ((unoidl.com.sun.star.text.XTextDocument)xComponent).getText().getEnd();  // в конец
 ((unoidl.com.sun.star.text.XTextDocument)xComponent).getText().insertString(x4, "Всего оказано услуг на сумму: " + temp2 + "рублей " + Environment.NewLine + Environment.NewLine + Environment.NewLine + "Вышеперечисленные работы (услуги) выполнены полностью и в срок. Заказчик претензий по объему, качеству и срокам оказания услуг претензий не имеет. " + Environment.NewLine+ Environment.NewLine+ Environment.NewLine, true);
 string temp3 = "";
-foreach (var i in ec4) { temp2 = i.FIO; }
+foreach (var i in Vrach) { temp2 = i.FIO; }
 foreach (var i in ec3) { temp3 = i.FIO; }
 unoidl.com.sun.star.text.XTextRange x5 = ((unoidl.com.sun.star.text.XTextDocument)xComponent).getText().getEnd();  // в конец
 ((unoidl.com.sun.star.text.XTextDocument)xComponent).getText().insertString(x5, "Исполнитель: " + temp2 + "                                          Заказчик: " + temp3 + Environment.NewLine + "                       ______________                                         _____________" + Environment.NewLine + "                                   М.П.                                                                    М.П.", true);

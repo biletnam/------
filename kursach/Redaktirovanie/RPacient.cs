@@ -15,9 +15,16 @@ namespace kursach
         {
             InitializeComponent();
         }
-
+        DB1 db1 = new DB1(kursach.Program.Pole.pole);
         private void Form3_Load(object sender, EventArgs e)
-        {            }
+        {
+            var ec = from n2 in db1.Pacient
+                     select n2;
+            foreach (var i in ec)
+            {
+                comboBox3.Items.Add(i.ID);
+            }
+        }
 
         private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -32,9 +39,8 @@ namespace kursach
 
         private void button3_Click(object sender, EventArgs e)
         {
-            DB1 db = new DB1(kursach.Program.Pole.pole);
-            var ec = from n in db.Pacient
-                     where n.ID==Convert.ToInt32(textBox3.Text)
+            var ec = from n in db1.Pacient
+                     where n.ID == Convert.ToInt32(comboBox3.Items[comboBox3.SelectedIndex])
                      select n;
             foreach(var i in ec)
             {
@@ -50,7 +56,7 @@ namespace kursach
             try
             {
             Met1 m = new Met1();
-            m.Edit(Convert.ToInt32(textBox3.Text), textBox1.Text, textBox2.Text, comboBox1.Items[comboBox1.SelectedIndex].ToString(), comboBox2.Items[comboBox2.SelectedIndex].ToString());
+            m.Edit(Convert.ToInt32(comboBox3.Items[comboBox3.SelectedIndex]), textBox1.Text, textBox2.Text, comboBox1.Items[comboBox1.SelectedIndex].ToString(), comboBox2.Items[comboBox2.SelectedIndex].ToString());
             this.Close();
             }
             catch (ArgumentOutOfRangeException) { MessageBox.Show("Не все поля заполнены"); }

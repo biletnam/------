@@ -15,13 +15,11 @@ namespace kursach
         [Column]
         public int IDPacienta;
         [Column]
-        public int IDVracha;
+        public int IDRaspisania;
         [Column]
         public int IDUslugi;
         [Column]
         public string Data;
-        [Column]
-        public string Vrem;
     }
     public class DB16 : DataContext
     {
@@ -38,24 +36,22 @@ namespace kursach
         DB13 db13 = new DB13(kursach.Program.Pole.pole);
         DB14 db14 = new DB14(kursach.Program.Pole.pole);
         DB1 db1 = new DB1(kursach.Program.Pole.pole);
-        public void ADD(int IDPacienta,int IDVracha,int IDUslugi,string Data,string Vrem)
+        public void ADD(int IDPacienta, int IDRaspisania, int IDUslugi, string Data)
         {
             Zapis pac = new Zapis();
             pac.IDPacienta = IDPacienta;
-            pac.IDVracha = IDVracha;
+            pac.IDRaspisania = IDRaspisania;
             pac.IDUslugi = IDUslugi;
-            pac.Vrem = Vrem ;
             pac.Data = Data;
             db16.Zapis.InsertOnSubmit(pac);
             db16.SubmitChanges();
         }
-        public void Edit(int ID, int IDPacienta, int IDVracha, int IDUslugi, string Data, string Vrem)
+        public void Edit(int ID, int IDPacienta, int IDRaspisania, int IDUslugi, string Data)
         {
             Zapis pac = db16.Zapis.Where(c => c.ID == ID).FirstOrDefault();
             pac.IDPacienta = IDPacienta;
-            pac.IDVracha = IDVracha;
+            pac.IDRaspisania = IDRaspisania;
             pac.IDUslugi = IDUslugi;
-            pac.Vrem = Vrem;
             pac.Data = Data;
             db16.SubmitChanges();
         }
@@ -65,47 +61,27 @@ namespace kursach
             db16.Zapis.DeleteOnSubmit(pac);
             db16.SubmitChanges();
         }
-        public bool prov_id(int id)
+        public string Dni(string Den)
         {
-            bool pro = false;
-            var ec = from n in db1.Pacient
-                     select n;
-            foreach (var i in ec)
+            string D = "";
+            switch (Den)
             {
-                if (id == i.ID)
-                {
-                    pro = true;
-                }
+                case "Понедельник": D = "Monday";
+                    break;
+                case "Вторник": D = "Tuesday";
+                    break;
+                case "Среда": D = "Wednesday";
+                    break;
+                case "Четверг": D = "Thursday";
+                    break;
+                case "Пятница": D = "Friday";
+                    break;
+                case "Суббота": D = "Saturday";
+                    break;
+                case "Воскресенье": D = "Sunday";
+                    break;
             }
-            return pro;
-        }
-        public bool prov_id2(int id)
-        {
-            bool pro = false;
-            var ec = from n in db13.Uslugi
-                     select n;
-            foreach (var i in ec)
-            {
-                if (id == i.ID)
-                {
-                    pro = true;
-                }
-            }
-            return pro;
-        }
-        public bool prov_id3(int id)
-        {
-            bool pro = false;
-            var ec = from n in db14.Vrach
-                     select n;
-            foreach (var i in ec)
-            {
-                if (id == i.ID)
-                {
-                    pro = true;
-                }
-            }
-            return pro;
+            return D;
         }
     }
 }

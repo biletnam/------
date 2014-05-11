@@ -93,3 +93,15 @@ C:\Users\silvestor\Desktop\OOP\kursach\kursach\obj\x86\Debug\kursach.operac.RIOb
 C:\Users\silvestor\Desktop\OOP\kursach\kursach\obj\x86\Debug\kursach.operac.DRabot.resources
 C:\Users\silvestor\Desktop\OOP\kursach\kursach\bin\Debug\itextsharp.dll
 C:\Users\silvestor\Desktop\OOP\kursach\kursach\bin\Debug\cli_uno.dll
+C:\Users\silvestor\Desktop\OOP\kursach\kursach\obj\x86\Debug\kursach.OtchetForm.resources
+C:\Users\silvestor\Desktop\OOP\kursach\kursach\bin\Debug\Microsoft.Office.Interop.Excel.dll
+C:\Users\silvestor\Desktop\OOP\kursach\kursach\bin\Debug\OpenPop.dll
+C:\Users\silvestor\Desktop\OOP\kursach\kursach\obj\x86\Debug\kursach.Firma.resources
+C:\Users\silvestor\Desktop\OOP\kursach\kursach\obj\x86\Debug\kursach.Form2.resources
+C:\Users\silvestor\Desktop\OOP\kursach\kursach\obj\x86\Debug\kursach.Form5.resources
+C:\Users\silvestor\Desktop\OOP\kursach\kursach\bin\Debug\EmailOtpravka.dll
+C:\Users\silvestor\Desktop\OOP\kursach\kursach\bin\Debug\RabotaSFailami.dll
+C:\Users\silvestor\Desktop\OOP\kursach\kursach\bin\Debug\EmailOtpravka.pdb
+C:\Users\silvestor\Desktop\OOP\kursach\kursach\bin\Debug\RabotaSFailami.pdb
+C:\Users\silvestor\Desktop\OOP\kursach\kursach\obj\x86\Debug\kursach.VoprosOtpravka.resources
+C:\Users\silvestor\Desktop\OOP\kursach\kursach\obj\x86\Debug\kursach.Zakupat.resources

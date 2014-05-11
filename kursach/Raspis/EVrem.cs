@@ -20,8 +20,10 @@ namespace kursach.Raspis
         {
             try
             {
+                string[] str2 = dateTimePicker2.Value.ToString().Split(new char[] { ' ' });
+                string[] str = dateTimePicker1.Value.ToString().Split(new char[] { ' ' });
                 Met15 m = new Met15();
-                m.Edit(Convert.ToInt32(textBox3.Text), comboBox1.Items[comboBox1.SelectedIndex].ToString(), textBox1.Text, textBox2.Text);
+                m.Edit(Convert.ToInt32(comboBox2.Items[comboBox2.SelectedIndex]), comboBox1.Items[comboBox1.SelectedIndex].ToString(), str[1], str2[1]);
                 this.Close();                
             }
             catch (ArgumentOutOfRangeException) { MessageBox.Show("Не все поля заполнены"); }
@@ -32,12 +34,12 @@ namespace kursach.Raspis
         {
             DB15 db = new DB15(kursach.Program.Pole.pole);
             var ec = from n in db.Vrem
-                     where n.ID == Convert.ToInt32(textBox3.Text)
+                     where n.ID == Convert.ToInt32(comboBox2.Items[comboBox2.SelectedIndex])
                      select n;
             foreach (var i in ec)
             {
-                textBox1.Text = i.VremN.ToString();
-                textBox2.Text = i.VremK.ToString();
+                dateTimePicker1.Text = i.VremN.ToString();
+                dateTimePicker2.Text = i.VremK.ToString();
                 comboBox1.Text = i.Den;
             }
         }
@@ -51,6 +53,18 @@ namespace kursach.Raspis
                     e.Handled = true;
                 }
             }
+        }
+        DB15 db15 = new DB15(kursach.Program.Pole.pole);
+        private void EVrem_Load(object sender, EventArgs e)
+        {
+            dateTimePicker1.Format = DateTimePickerFormat.Time;
+            dateTimePicker2.Format = DateTimePickerFormat.Time;
+            var Vrem = from n2 in db15.Vrem
+                      select n2;
+            foreach (var i in Vrem)
+            {
+                comboBox2.Items.Add(i.ID);
+            }  
         }
     }
 }

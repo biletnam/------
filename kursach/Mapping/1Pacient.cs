@@ -59,10 +59,16 @@ namespace kursach
             pac.Status = Status;
             db1.SubmitChanges();
         }
-        public void Delete(int ID)
+        public void Delete(string FIO)
+        {
+            Pacient pac = db1.Pacient.Where(c => c.FIO == FIO).FirstOrDefault();
+            db1.Pacient.DeleteOnSubmit(pac);
+            db1.SubmitChanges();
+        }
+        public void Posesh(int ID) 
         {
             Pacient pac = db1.Pacient.Where(c => c.ID == ID).FirstOrDefault();
-            db1.Pacient.DeleteOnSubmit(pac);
+            pac.Posesh = pac.Posesh+1;
             db1.SubmitChanges();
         }
     }

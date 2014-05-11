@@ -8,183 +8,107 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
-
+using RabotaSFailami;
+  
 namespace kursach
 {
     public partial class Form1 : Form
     {
-        private DataGridView dataGridView1 = new DataGridView();
-        DataGridView dataGridView2 = new DataGridView();
-        private BindingSource bindingSource1 = new BindingSource();
-        private SqlDataAdapter dataAdapter = new SqlDataAdapter();
-        private SqlDataAdapter dataAdapter2 = new SqlDataAdapter();
-        private BindingSource bindingSource2 = new BindingSource();
-        //Метод для открытия и считывания файла
-        public string outFile(string path)
-        {
-            System.IO.StreamReader reader = new System.IO.StreamReader(path);
-            string line = "";
-            line = reader.ReadLine();
-            reader.Close();
-            return line;
-        }
-        //Метод работы c БД
-        private void GetData(string selectCommand)
-        {
-            try
-            {
-                //Подключаемся к БД
-                String connectionString = kursach.Program.Pole.pole;
-                //  Создать новый адаптер данных на основе указанного запроса.
-                dataAdapter = new SqlDataAdapter(selectCommand, connectionString);
-                // Создаем команду строителя для создания обновления SQL, вставить, и
-                // Удалить команды, основанные на SelectCommand. Они используются для
-                // Обновить базу данных.
-                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
-                //  Заполнение новую таблицу данных и привязать его к BindingSource..
-                DataTable table = new DataTable();
-                table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-                dataAdapter.Fill(table);
-                bindingSource1.DataSource = table;
-                // Resize the DataGridView columns to fit the newly loaded content.
-                dataGridView1.AutoResizeColumns(
-                DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
-            }
-            catch (SqlException)
-            {
-                MessageBox.Show("To run this example, replace the value of the " +
-                    "connectionString variable with a connection string that is " +
-                    "valid for your system.");
-            }
-            catch (ArgumentException) { MessageBox.Show("Неправильная строка подключения"); }
-            
-        }
-        private void GetData2(string selectCommand)
-        {
-            try
-            {
-                //Подключаемся к БД
-                String connectionString = kursach.Program.Pole.pole;
-                //  Создать новый адаптер данных на основе указанного запроса.
-                dataAdapter2 = new SqlDataAdapter(selectCommand, connectionString);
-                // Создаем команду строителя для создания обновления SQL, вставить, и
-                // Удалить команды, основанные на SelectCommand. Они используются для
-                // Обновить базу данных.
-                SqlCommandBuilder commandBuilder2 = new SqlCommandBuilder(dataAdapter2);
-                //  Заполнение новую таблицу данных и привязать его к BindingSource..
-                DataTable table2 = new DataTable();
-                table2.Locale = System.Globalization.CultureInfo.InvariantCulture;
-                dataAdapter2.Fill(table2);
-                bindingSource2.DataSource = table2;
-                // Resize the DataGridView columns to fit the newly loaded content.
-                dataGridView2.AutoResizeColumns(
-                DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
-            }
-            catch (SqlException)
-            {
-                MessageBox.Show("To run this example, replace the value of the " +
-                    "connectionString variable with a connection string that is " +
-                    "valid for your system.");
-            }
-            catch (ArgumentException) { MessageBox.Show("Неправильная строка подключения"); }
-        }
+        RabotaSFailami.RabotaSFailami rsf = new RabotaSFailami.RabotaSFailami();
+
         Panel panel1;
+        DPacient f = new DPacient();
+        public int n;
+        
+        
         public Form1()
         {
             InitializeComponent();
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            toolStripMenuItem22.Visible = false;
             try
             {
-                kursach.Program.Pole.pole = outFile(Application.StartupPath.ToString() + "\\DataSource.txt");
+                kursach.Program.Pole.pole = rsf.outFile(Application.StartupPath.ToString() + "\\DataSource.txt");
             }
             catch { MessageBox.Show("Файл не найден"); }            
             panel1 = new Panel();
-        }        
-        //Событие для списка
-        void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        }               
+        private void add_Click(object sender, EventArgs e)
         {
-            try
+            switch (n)
             {
-                if (e.Node.Text == "Добавить")
-                {
-                    switch (n)
-                    {
-                        case 1:
-                            DPacient f = new DPacient();
-                            f.ShowDialog(); // показываем    
-                            break;
-                        case 2:
-                            Dobavlenie.DVrach f2 = new Dobavlenie.DVrach();
-                            f2.ShowDialog(); // показываем    
-                            break;
-                        case 3:
-                            Dobavlenie.DOborud f3 = new Dobavlenie.DOborud();
-                            f3.ShowDialog(); // показываем    
-                            break;
-                        case 4:
-                            Dobavlenie.DMedicament f4 = new Dobavlenie.DMedicament();
-                            f4.ShowDialog(); // показываем    
-                            break;
-                        case 5:
-                            Dobavlenie.DUslugi f5 = new Dobavlenie.DUslugi();
-                            f5.ShowDialog(); // показываем    
-                            break;
-                        case 6:
-                            Dobavlenie.DPostavshik f6 = new Dobavlenie.DPostavshik();
-                            f6.ShowDialog(); // показываем    
-                            break;
-                        case 7:
-                            Dobavlenie.DSpisokDoljnostei f7 = new Dobavlenie.DSpisokDoljnostei();
-                            f7.ShowDialog(); // показываем       
-                            break;
+                case 1:
+                    DPacient f = new DPacient();
+                    f.ShowDialog(); // показываем    
+                    break;
+                case 2:
+                    Dobavlenie.DVrach f2 = new Dobavlenie.DVrach();
+                    f2.ShowDialog(); // показываем    
+                    break;
+                case 3:
+                    Dobavlenie.DOborud f3 = new Dobavlenie.DOborud();
+                    f3.ShowDialog(); // показываем    
+                    break;
+                case 4:
+                    Dobavlenie.DMedicament f4 = new Dobavlenie.DMedicament();
+                    f4.ShowDialog(); // показываем    
+                    break;
+                case 5:
+                    Dobavlenie.DUslugi f5 = new Dobavlenie.DUslugi();
+                    f5.ShowDialog(); // показываем    
+                    break;
+                case 6:
+                    Dobavlenie.DPostavshik f6 = new Dobavlenie.DPostavshik();
+                    f6.ShowDialog(); // показываем    
+                    break;
+                case 7:
+                    Dobavlenie.DSpisokDoljnostei f7 = new Dobavlenie.DSpisokDoljnostei();
+                    f7.ShowDialog(); // показываем       
+                    break;
 
-                    }
-                    GetData(dataAdapter.SelectCommand.CommandText);
-                }
-                else
-                {
-                    if (e.Node.Text == "Редактировать")
-                    {
-                        switch (n)
-                        {
-                            case 1:
-                                Form3 f = new Form3();
-                                f.ShowDialog(); // показываем                            
-                                break;
-                            case 2:
-                                Redaktirovanie.RVrach f2 = new Redaktirovanie.RVrach();
-                                f2.ShowDialog(); // показываем                            
-                                break;
-                            case 3:
-                                Redaktirovanie.ROborud f3 = new Redaktirovanie.ROborud();
-                                f3.ShowDialog(); // показываем                            
-                                break;
-                            case 4:
-                                Redaktirovanie.RMedicament f4 = new Redaktirovanie.RMedicament();
-                                f4.ShowDialog(); // показываем                            
-                                break;
-                            case 5:
-                                Redaktirovanie.RUslugi f5 = new Redaktirovanie.RUslugi();
-                                f5.ShowDialog(); // показываем                            
-                                break;
-                            case 6:
-                                Redaktirovanie.RPostavshik f6 = new Redaktirovanie.RPostavshik();
-                                f6.ShowDialog(); // показываем                            
-                                break;
-                            case 7:
-                                Redaktirovanie.RSpisokdoljnostei f7 = new Redaktirovanie.RSpisokdoljnostei();
-                                f7.ShowDialog(); // показываем       
-                                break;
-                        }
-                        GetData(dataAdapter.SelectCommand.CommandText);
-                    }
-                    else
-                    {
-                        if (e.Node.Text == "Удалить")
-                        {
-                            switch (n)
+            }
+            rsf.GetData(rsf.dataAdapter.SelectCommand.CommandText, kursach.Program.Pole.pole);
+        }
+        private void edit_Click(object sender, EventArgs e)
+        {
+            switch (n)
+            {
+                case 1:
+                    Form3 f = new Form3();
+                    f.ShowDialog(); // показываем                            
+                    break;
+                case 2:
+                    Redaktirovanie.RVrach f2 = new Redaktirovanie.RVrach();
+                    f2.ShowDialog(); // показываем                            
+                    break;
+                case 3:
+                    Redaktirovanie.ROborud f3 = new Redaktirovanie.ROborud();
+                    f3.ShowDialog(); // показываем                            
+                    break;
+                case 4:
+                    Redaktirovanie.RMedicament f4 = new Redaktirovanie.RMedicament();
+                    f4.ShowDialog(); // показываем                            
+                    break;
+                case 5:
+                    Redaktirovanie.RUslugi f5 = new Redaktirovanie.RUslugi();
+                    f5.ShowDialog(); // показываем                            
+                    break;
+                case 6:
+                    Redaktirovanie.RPostavshik f6 = new Redaktirovanie.RPostavshik();
+                    f6.ShowDialog(); // показываем                            
+                    break;
+                case 7:
+                    Redaktirovanie.RSpisokdoljnostei f7 = new Redaktirovanie.RSpisokdoljnostei();
+                    f7.ShowDialog(); // показываем       
+                    break;
+            }
+            rsf.GetData(rsf.dataAdapter.SelectCommand.CommandText, kursach.Program.Pole.pole);
+        }
+        private void del_Click(object sender, EventArgs e)
+        {
+            switch (n)
                             {
                                 case 1:
                                     Form4 f = new Form4();
@@ -215,85 +139,49 @@ namespace kursach
                                     f7.ShowDialog(); // показываем       
                                     break;
                             }
-                            GetData(dataAdapter.SelectCommand.CommandText);
-
-                        }
-                        else
-                        {
-                            if (e.Node.Text == "Расписание")
-                            {
-                                kursach.Raspis.Raspisanie f1 = new kursach.Raspis.Raspisanie();
-                                f1.ShowDialog(); // показываем
-                            }
-                            else
-                            {
-                                if (e.Node.Text == "Добавить время работы")
-                                {
-                                    kursach.Raspis.DVrem f2 = new kursach.Raspis.DVrem();
-                                    f2.ShowDialog(); // показываем
-                                    GetData(dataAdapter.SelectCommand.CommandText);
-                                    GetData2(dataAdapter2.SelectCommand.CommandText);
-                                }
-                                else
-                                {
-                                    if (e.Node.Text == "Добавить расписание")
-                                    {
-                                        kursach.Raspis.DRaspisanie f3 = new kursach.Raspis.DRaspisanie();
-                                        f3.ShowDialog(); // показываем
-                                        GetData(dataAdapter.SelectCommand.CommandText);
-                                        GetData2(dataAdapter2.SelectCommand.CommandText);
-                                    }
-                                    else
-                                    {
-                                        if (e.Node.Text == "Удалить время работы")
-                                        {
-                                            kursach.Raspis.DelVrem f4 = new kursach.Raspis.DelVrem();
-                                            f4.ShowDialog(); // показываем
-                                            GetData(dataAdapter.SelectCommand.CommandText);
-                                            GetData2(dataAdapter2.SelectCommand.CommandText);
-                                        }
-                                        else
-                                        {
-                                            if (e.Node.Text == "Удалить расписание")
-                                            {
-                                                kursach.Raspis.DelRaspisanie f5 = new kursach.Raspis.DelRaspisanie();
-                                                f5.ShowDialog(); // показываем
-                                                GetData(dataAdapter.SelectCommand.CommandText);
-                                                GetData2(dataAdapter2.SelectCommand.CommandText);
-                                            }
-                                            else
-                                            {
-                                                if (e.Node.Text == "Редактировать время работы")
-                                                {
-                                                    kursach.Raspis.EVrem f6 = new kursach.Raspis.EVrem();
-                                                    f6.ShowDialog(); // показываем
-                                                    GetData(dataAdapter.SelectCommand.CommandText);
-                                                    GetData2(dataAdapter2.SelectCommand.CommandText);
-                                                }
-                                                else
-                                                {
-                                                    if (e.Node.Text == "Редактировать расписание")
-                                                    {
-                                                        kursach.Raspis.ERaspisanie f7 = new kursach.Raspis.ERaspisanie();
-                                                        f7.ShowDialog(); // показываем
-                                                        GetData(dataAdapter.SelectCommand.CommandText);
-                                                        GetData2(dataAdapter2.SelectCommand.CommandText);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }                            
-                            }
-                            
-                        }
-                    }
-                }
-            }
-            catch { MessageBox.Show("Error"); }            
+            rsf.GetData(rsf.dataAdapter.SelectCommand.CommandText, kursach.Program.Pole.pole);
         }
-        DPacient f = new DPacient();
-        public int n;
+        private void addv_Click(object sender, EventArgs e)
+        {
+            kursach.Raspis.DVrem f2 = new kursach.Raspis.DVrem();
+            f2.ShowDialog(); // показываем
+            rsf.GetData(rsf.dataAdapter.SelectCommand.CommandText, kursach.Program.Pole.pole);
+        }
+        private void addr_Click(object sender, EventArgs e)
+        {
+            kursach.Raspis.DRaspisanie f3 = new kursach.Raspis.DRaspisanie();
+            f3.ShowDialog(); // показываем
+            rsf.GetData(rsf.dataAdapter.SelectCommand.CommandText, kursach.Program.Pole.pole);
+        }
+        private void editv_Click(object sender, EventArgs e) 
+        {
+            kursach.Raspis.EVrem f6 = new kursach.Raspis.EVrem();
+            f6.ShowDialog(); // показываем
+            rsf.GetData(rsf.dataAdapter.SelectCommand.CommandText, kursach.Program.Pole.pole); 
+        }
+        private void editr_Click(object sender, EventArgs e)
+        {
+            kursach.Raspis.ERaspisanie f7 = new kursach.Raspis.ERaspisanie();
+            f7.ShowDialog(); // показываем
+            rsf.GetData(rsf.dataAdapter.SelectCommand.CommandText, kursach.Program.Pole.pole);  
+        }
+        private void delv_Click(object sender, EventArgs e) 
+        {
+            kursach.Raspis.DelVrem f4 = new kursach.Raspis.DelVrem();
+            f4.ShowDialog(); // показываем
+            rsf.GetData(rsf.dataAdapter.SelectCommand.CommandText, kursach.Program.Pole.pole);
+        }
+        private void delr_Click(object sender, EventArgs e) 
+        {
+            kursach.Raspis.DelRaspisanie f5 = new kursach.Raspis.DelRaspisanie();
+            f5.ShowDialog(); // показываем
+            rsf.GetData(rsf.dataAdapter.SelectCommand.CommandText, kursach.Program.Pole.pole);
+        }
+        private void rasp_Click(object sender, EventArgs e) 
+        {
+            kursach.Raspis.Raspisanie f1 = new kursach.Raspis.Raspisanie();
+                                f1.ShowDialog(); // показываем 
+        }
         //Вкладка пациента
         public void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
@@ -305,35 +193,38 @@ namespace kursach
                 panel1.AutoScroll = true;
                 panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
                 panel1.Dock = DockStyle.Fill;
-                this.Controls.Add(panel1);
-                //Добавление списка Добавить Удалить Редактировать
-                TreeView treeView1 = new TreeView();
-                treeView1.BackColor = Color.LightBlue;
-                treeView1.Width = 150;
-                treeView1.ItemHeight = 100;
-                treeView1.Dock = DockStyle.Left;
-                treeView1.AfterSelect +=
-                new System.Windows.Forms.TreeViewEventHandler(treeView1_AfterSelect);
-                TreeNode tn = new TreeNode("Пациент");
-                tn.Expand();
-                tn.Nodes.Add(new TreeNode("Добавить"));
-                tn.Nodes.Add(new TreeNode("Удалить"));
-                tn.Nodes.Add(new TreeNode("Редактировать"));
-                treeView1.Nodes.Add(tn);
-                panel1.Controls.Add(treeView1);
+                this.Controls.Add(panel1);                
+                Button add = new Button();
+                add.Text = "Добавить запись";
+                add.Location = new Point(0, 28);
+                add.Width = 200;
+                add.Click += new System.EventHandler(add_Click);
+                panel1.Controls.Add(add);
+                Button edit = new Button();
+                edit.Text = "Редактировать запись";
+                edit.Location = new Point(200, 28);
+                edit.Width = 200;
+                edit.Click += new System.EventHandler(edit_Click);
+                panel1.Controls.Add(edit);
+                Button del = new Button();
+                del.Text = "Удалить запись";
+                del.Location = new Point(400, 28);
+                del.Width = 200;
+                del.Click += new System.EventHandler(del_Click);
+                panel1.Controls.Add(del);
                 DataGridView dataGridView1 = new DataGridView();
                 dataGridView1.AutoSize = true;
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                dataGridView1.Location = new Point(150, 28);
+                dataGridView1.Location = new Point(0, 56);
                 dataGridView1.DataMember = "Table";
                 panel1.Controls.Add(dataGridView1);
                 //Свяжите DataGridView к BindingSource И загрузить данные из базы данных.
-                dataGridView1.DataSource = bindingSource1;
-                GetData("select * from Pacient");
+                dataGridView1.DataSource = rsf.bindingSource1;
+                rsf.GetData("select * from Pacient",kursach.Program.Pole.pole);
                 dataGridView1.Columns[1].HeaderText = "ФИО";
                 dataGridView1.Columns[2].HeaderText = "Полис";
                 dataGridView1.Columns[3].HeaderText = "Посещения";
-                dataGridView1.Columns[4].HeaderText = "1 обращение";
+                dataGridView1.Columns[4].HeaderText = "Первое обращение";
                 dataGridView1.Columns[5].HeaderText = "Пол";
                 dataGridView1.Columns[6].HeaderText = "Статус";
             }
@@ -350,44 +241,67 @@ namespace kursach
             panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             panel1.Dock = DockStyle.Fill;
             this.Controls.Add(panel1);
-            //Добавление списка Добавить Удалить Редактировать
-            TreeView treeView1 = new TreeView();
-            treeView1.BackColor = Color.LightBlue;
-            treeView1.Width = 150;
-            treeView1.ItemHeight = 100;
-            treeView1.Dock = DockStyle.Left;
-            treeView1.AfterSelect +=
-            new System.Windows.Forms.TreeViewEventHandler(treeView1_AfterSelect);
-            TreeNode tn = new TreeNode("Врач");
-            tn.Expand();
-            tn.Nodes.Add(new TreeNode("Добавить"));
-            tn.Nodes.Add(new TreeNode("Удалить"));
-            tn.Nodes.Add(new TreeNode("Редактировать"));
-            treeView1.Nodes.Add(tn);
-            panel1.Controls.Add(treeView1);
+            Button add = new Button();
+            add.Text = "Добавить запись";
+            add.Location = new Point(0, 28);
+            add.Width = 200;
+            add.Click += new System.EventHandler(add_Click);
+            panel1.Controls.Add(add);
+            Button edit = new Button();
+            edit.Text = "Редактировать запись";
+            edit.Location = new Point(200, 28);
+            edit.Width = 200;
+            edit.Click += new System.EventHandler(edit_Click);
+            panel1.Controls.Add(edit);
+            Button del = new Button();
+            del.Text = "Удалить запись";
+            del.Location = new Point(400, 28);
+            del.Width = 200;
+            del.Click += new System.EventHandler(del_Click);
+            panel1.Controls.Add(del);
             DataGridView dataGridView1 = new DataGridView();
             dataGridView1.AutoSize = true;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridView1.Location = new Point(150, 28);
+            dataGridView1.Location = new Point(0, 56);
             dataGridView1.DataMember = "Table";
             panel1.Controls.Add(dataGridView1);
             //Свяжите DataGridView к BindingSource И загрузить данные из базы данных.
-            dataGridView1.DataSource = bindingSource1;
-            GetData("select * from Vrach");
+            dataGridView1.DataSource = rsf.bindingSource1;
+            rsf.GetData("select * from Vrach,SpisokDoljnostei where Vrach.IDSpiskaDolj=SpisokDoljnostei.ID", kursach.Program.Pole.pole);
             dataGridView1.Columns[1].HeaderText = "ФИО";
-            dataGridView1.Columns[2].HeaderText = "ID Должность";            
-            dataGridView1.Columns[3].HeaderText = "Дата приема";
+            dataGridView1.Columns[2].Visible = false;
+            dataGridView1.Columns[3].HeaderText = "Дата приема на работу";
             dataGridView1.Columns[4].HeaderText = "Вып. работы/Время работ";
-            dataGridView1.Columns[5].HeaderText = "Норма";
+            dataGridView1.Columns[5].HeaderText = "Норма(в часах)";
             dataGridView1.Columns[6].HeaderText = "Премия";
             dataGridView1.Columns[7].HeaderText = "Зарплата";
+            dataGridView1.Columns[8].Visible = false;
+            dataGridView1.Columns[9].HeaderText = "Должность";
+            dataGridView1.Columns[10].HeaderText = "Оклад";
+            dataGridView1.Columns[11].HeaderText = "Ден. ед.";
+            string AlgoritmZarplat=rsf.outFile(Application.StartupPath.ToString() + "\\FormOplata.txt");
+            if (AlgoritmZarplat == "Прямая сдельная оплата труда" || AlgoritmZarplat =="Простая повременная оплата труда" ) 
+            {
+                dataGridView1.Columns[6].Visible = false;
+                dataGridView1.Columns[5].Visible = false;
+            }
+            if (AlgoritmZarplat == "Сдельно-премиальная оплата труда" || AlgoritmZarplat == "Повременно-премиальная оплата труда") { dataGridView1.Columns[5].Visible = false; }
+            if (AlgoritmZarplat == "Сдельно-прогрессивная оплата труда") { dataGridView1.Columns[6].Visible = false; }
+            if (AlgoritmZarplat == "Окладная оплата труда") 
+            {
+                dataGridView1.Columns[6].Visible = false;
+                dataGridView1.Columns[5].Visible = false;
+                dataGridView1.Columns[4].Visible = false;
+            }
             }
             catch { MessageBox.Show("Error"); }
         }
         //Вкладка Оборудование
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
+
         {
-            try{
+            try
+            {
             n = 3;
             panel1.Controls.Clear();
             //Добавление контейнера        
@@ -395,33 +309,42 @@ namespace kursach
             panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             panel1.Dock = DockStyle.Fill;
             this.Controls.Add(panel1);
-            //Добавление списка Добавить Удалить Редактировать
-            TreeView treeView1 = new TreeView();
-            treeView1.BackColor = Color.LightBlue;
-            treeView1.Width = 150;
-            treeView1.ItemHeight = 100;
-            treeView1.Dock = DockStyle.Left;
-            treeView1.AfterSelect +=
-            new System.Windows.Forms.TreeViewEventHandler(treeView1_AfterSelect);
-            TreeNode tn = new TreeNode("Оборудование");
-            tn.Expand();
-            tn.Nodes.Add(new TreeNode("Добавить"));
-            tn.Nodes.Add(new TreeNode("Удалить"));
-            tn.Nodes.Add(new TreeNode("Редактировать"));
-            treeView1.Nodes.Add(tn);
-            panel1.Controls.Add(treeView1);
+            Button add = new Button();
+            add.Text = "Добавить запись";
+            add.Location = new Point(0, 28);
+            add.Width = 200;
+            add.Click += new System.EventHandler(add_Click);
+            panel1.Controls.Add(add);
+            Button edit = new Button();
+            edit.Text = "Редактировать запись";
+            edit.Location = new Point(200, 28);
+            edit.Width = 200;
+            edit.Click += new System.EventHandler(edit_Click);
+            panel1.Controls.Add(edit);
+            Button del = new Button();
+            del.Text = "Удалить запись";
+            del.Location = new Point(400, 28);
+            del.Width = 200;
+            del.Click += new System.EventHandler(del_Click);
+            panel1.Controls.Add(del);
             DataGridView dataGridView1 = new DataGridView();
             dataGridView1.AutoSize = true;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridView1.Location = new Point(150, 28);
+            dataGridView1.Location = new Point(0, 56);
             dataGridView1.DataMember = "Table";
             panel1.Controls.Add(dataGridView1);
             //Свяжите DataGridView к BindingSource И загрузить данные из базы данных.
-            dataGridView1.DataSource = bindingSource1;
-            GetData("select * from Oborud");
+            dataGridView1.DataSource = rsf.bindingSource1;
+            rsf.GetData("select * from Oborud,Postavshik where Oborud.IDPostav=Postavshik.ID", kursach.Program.Pole.pole);
             dataGridView1.Columns[1].HeaderText = "Наименование";
             dataGridView1.Columns[2].HeaderText = "Цена";
-            dataGridView1.Columns[3].HeaderText = "ID поставщика";
+            dataGridView1.Columns[3].Visible = false;
+            dataGridView1.Columns[6].HeaderText = "Фирма";
+            dataGridView1.Columns[5].Visible = false;
+            dataGridView1.Columns[7].Visible = false;
+            dataGridView1.Columns[4].HeaderText = "Ден. ед.";
+            dataGridView1.Columns[8].Visible = false;
+            dataGridView1.Columns[9].Visible = false;
             }
             catch { MessageBox.Show("Error"); }
         }
@@ -430,6 +353,12 @@ namespace kursach
         {
             try
             {
+                DB8 db = new DB8(kursach.Program.Pole.pole);
+                var ec = from n2 in db.Nastroiki
+                         where n2.ID == 1
+                         select n2;
+                EmailPriem ep = new EmailPriem();
+                //foreach(var i in ec){ep.priem(i.login,i.pass);}
             n = 4;
             panel1.Controls.Clear();
             //Добавление контейнера        
@@ -437,36 +366,46 @@ namespace kursach
             panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             panel1.Dock = DockStyle.Fill;
             this.Controls.Add(panel1);
-            //Добавление списка Добавить Удалить Редактировать
-            TreeView treeView1 = new TreeView();
-            treeView1.BackColor = Color.LightBlue;
-            treeView1.Width = 150;
-            treeView1.ItemHeight = 100;
-            treeView1.Dock = DockStyle.Left;
-            treeView1.AfterSelect +=
-            new System.Windows.Forms.TreeViewEventHandler(treeView1_AfterSelect);
-            TreeNode tn = new TreeNode("Медикаменты");
-            tn.Expand();
-            tn.Nodes.Add(new TreeNode("Добавить"));
-            tn.Nodes.Add(new TreeNode("Удалить"));
-            tn.Nodes.Add(new TreeNode("Редактировать"));
-            treeView1.Nodes.Add(tn);
-            panel1.Controls.Add(treeView1);
+            Button add = new Button();
+            add.Text = "Добавить запись";
+            add.Location = new Point(0, 28);
+            add.Width = 200;
+            add.Click += new System.EventHandler(add_Click);
+            panel1.Controls.Add(add);
+            Button edit = new Button();
+            edit.Text = "Редактировать запись";
+            edit.Location = new Point(200, 28);
+            edit.Width = 200;
+            edit.Click += new System.EventHandler(edit_Click);
+            panel1.Controls.Add(edit);
+            Button del = new Button();
+            del.Text = "Удалить запись";
+            del.Location = new Point(400, 28);
+            del.Width = 200;
+            del.Click += new System.EventHandler(del_Click);
+            panel1.Controls.Add(del);
             DataGridView dataGridView1 = new DataGridView();
             dataGridView1.AutoSize = true;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridView1.Location = new Point(150, 28);
+            dataGridView1.Location = new Point(0, 56);
             dataGridView1.DataMember = "Table";
             panel1.Controls.Add(dataGridView1);
             //Свяжите DataGridView к BindingSource И загрузить данные из базы данных.
-            dataGridView1.DataSource = bindingSource1;
-            GetData("select * from Medicament");
+            dataGridView1.DataSource = rsf.bindingSource1;
+            rsf.GetData("select * from Medicament,Postavshik where Medicament.IDPost=Postavshik.ID", kursach.Program.Pole.pole);
             dataGridView1.Columns[1].HeaderText = "Наименование";
             dataGridView1.Columns[2].HeaderText = "Количество";
-            dataGridView1.Columns[3].HeaderText = "ID поставщика";
+            dataGridView1.Columns[3].Visible = false;
             dataGridView1.Columns[4].HeaderText = "Минимум";
             dataGridView1.Columns[5].HeaderText = "Цена за ед";
             dataGridView1.Columns[6].HeaderText = "Заказывать";
+            dataGridView1.Columns[7].HeaderText = "Ед. изм.";
+            dataGridView1.Columns[8].HeaderText = "Ден. ед.";
+            dataGridView1.Columns[9].Visible = false;
+            dataGridView1.Columns[11].Visible = false;
+            dataGridView1.Columns[10].HeaderText = "Фирма";
+            dataGridView1.Columns[12].Visible = false;
+            dataGridView1.Columns[13].Visible = false;
             }
             catch { MessageBox.Show("Error"); }
         }
@@ -481,32 +420,36 @@ namespace kursach
             panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             panel1.Dock = DockStyle.Fill;
             this.Controls.Add(panel1);
-            //Добавление списка Добавить Удалить Редактировать
-            TreeView treeView1 = new TreeView();
-            treeView1.BackColor = Color.LightBlue;
-            treeView1.Width = 150;
-            treeView1.ItemHeight = 100;
-            treeView1.Dock = DockStyle.Left;
-            treeView1.AfterSelect +=
-            new System.Windows.Forms.TreeViewEventHandler(treeView1_AfterSelect);
-            TreeNode tn = new TreeNode("Услуги");
-            tn.Expand();
-            tn.Nodes.Add(new TreeNode("Добавить"));
-            tn.Nodes.Add(new TreeNode("Удалить"));
-            tn.Nodes.Add(new TreeNode("Редактировать"));
-            treeView1.Nodes.Add(tn);
-            panel1.Controls.Add(treeView1);
+            Button add = new Button();
+            add.Text = "Добавить запись";
+            add.Location = new Point(0, 28);
+            add.Width = 200;
+            add.Click += new System.EventHandler(add_Click);
+            panel1.Controls.Add(add);
+            Button edit = new Button();
+            edit.Text = "Редактировать запись";
+            edit.Location = new Point(200, 28);
+            edit.Width = 200;
+            edit.Click += new System.EventHandler(edit_Click);
+            panel1.Controls.Add(edit);
+            Button del = new Button();
+            del.Text = "Удалить запись";
+            del.Location = new Point(400, 28);
+            del.Width = 200;
+            del.Click += new System.EventHandler(del_Click);
+            panel1.Controls.Add(del);
             DataGridView dataGridView1 = new DataGridView();
             dataGridView1.AutoSize = true;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridView1.Location = new Point(150, 28);
+            dataGridView1.Location = new Point(0, 56);
             dataGridView1.DataMember = "Table";
             panel1.Controls.Add(dataGridView1);
             //Свяжите DataGridView к BindingSource И загрузить данные из базы данных.
-            dataGridView1.DataSource = bindingSource1;
-            GetData("select * from Uslugi");
+            dataGridView1.DataSource = rsf.bindingSource1;
+            rsf.GetData("select * from Uslugi", kursach.Program.Pole.pole);
             dataGridView1.Columns[1].HeaderText = "Наименование";
             dataGridView1.Columns[2].HeaderText = "Цена";
+            dataGridView1.Columns[3].HeaderText = "Ден. ед.";
             }
             catch { MessageBox.Show("Error"); }
         }
@@ -521,31 +464,36 @@ namespace kursach
             panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             panel1.Dock = DockStyle.Fill;
             this.Controls.Add(panel1);
-            //Добавление списка Добавить Удалить Редактировать
-            TreeView treeView1 = new TreeView();
-            treeView1.BackColor = Color.LightBlue;
-            treeView1.Width = 150;
-            treeView1.ItemHeight = 100;
-            treeView1.Dock = DockStyle.Left;
-            treeView1.AfterSelect +=
-            new System.Windows.Forms.TreeViewEventHandler(treeView1_AfterSelect);
-            TreeNode tn = new TreeNode("Поставщики");
-            tn.Expand();
-            tn.Nodes.Add(new TreeNode("Добавить"));
-            tn.Nodes.Add(new TreeNode("Удалить"));
-            tn.Nodes.Add(new TreeNode("Редактировать"));
-            treeView1.Nodes.Add(tn);
-            panel1.Controls.Add(treeView1);
+            Button add = new Button();
+            add.Text = "Добавить запись";
+            add.Location = new Point(0, 28);
+            add.Width = 200;
+            add.Click += new System.EventHandler(add_Click);
+            panel1.Controls.Add(add);
+            Button edit = new Button();
+            edit.Text = "Редактировать запись";
+            edit.Location = new Point(200, 28);
+            edit.Width = 200;
+            edit.Click += new System.EventHandler(edit_Click);
+            panel1.Controls.Add(edit);
+            Button del = new Button();
+            del.Text = "Удалить запись";
+            del.Location = new Point(400, 28);
+            del.Width = 200;
+            del.Click += new System.EventHandler(del_Click);
+            panel1.Controls.Add(del);
             DataGridView dataGridView1 = new DataGridView();
             dataGridView1.AutoSize = true;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridView1.Location = new Point(150, 28);
+            dataGridView1.Location = new Point(0, 56);
             dataGridView1.DataMember = "Table";
             panel1.Controls.Add(dataGridView1);
             //Свяжите DataGridView к BindingSource И загрузить данные из базы данных.
-            dataGridView1.DataSource = bindingSource1;
-            GetData("select * from Postavshik");
+            dataGridView1.DataSource = rsf.bindingSource1;
+            rsf.GetData("select * from Postavshik", kursach.Program.Pole.pole);
             dataGridView1.Columns[1].HeaderText = "Наименование";
+            dataGridView1.Columns[3].HeaderText = "Адрес";
+            dataGridView1.Columns[4].HeaderText = "Телефон";
             }
             catch { MessageBox.Show("Error"); }
         }
@@ -560,39 +508,44 @@ namespace kursach
             panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             panel1.Dock = DockStyle.Fill;
             this.Controls.Add(panel1);
-            //Добавление списка Добавить Удалить Редактировать
-            TreeView treeView1 = new TreeView();
-            treeView1.BackColor = Color.LightBlue;
-            treeView1.Width = 150;
-            treeView1.ItemHeight = 100;
-            treeView1.Dock = DockStyle.Left;
-            treeView1.AfterSelect +=
-            new System.Windows.Forms.TreeViewEventHandler(treeView1_AfterSelect);
-            TreeNode tn = new TreeNode("Должности");
-            tn.Expand();
-            tn.Nodes.Add(new TreeNode("Добавить"));
-            tn.Nodes.Add(new TreeNode("Удалить"));
-            tn.Nodes.Add(new TreeNode("Редактировать"));
-            treeView1.Nodes.Add(tn);
-            panel1.Controls.Add(treeView1);
+            Button add = new Button();
+            add.Text = "Добавить запись";
+            add.Location = new Point(0, 28);
+            add.Width = 200;
+            add.Click += new System.EventHandler(add_Click);
+            panel1.Controls.Add(add);
+            Button edit = new Button();
+            edit.Text = "Редактировать запись";
+            edit.Location = new Point(200, 28);
+            edit.Width = 200;
+            edit.Click += new System.EventHandler(edit_Click);
+            panel1.Controls.Add(edit);
+            Button del = new Button();
+            del.Text = "Удалить запись";
+            del.Location = new Point(400, 28);
+            del.Width = 200;
+            del.Click += new System.EventHandler(del_Click);
+            panel1.Controls.Add(del);
             DataGridView dataGridView1 = new DataGridView();
             dataGridView1.AutoSize = true;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridView1.Location = new Point(150, 28);
+            dataGridView1.Location = new Point(0, 56);
             dataGridView1.DataMember = "Table";
             panel1.Controls.Add(dataGridView1);
             //Свяжите DataGridView к BindingSource И загрузить данные из базы данных.
-            dataGridView1.DataSource = bindingSource1;
-            GetData("select * from SpisokDoljnostei");
+            dataGridView1.DataSource = rsf.bindingSource1;
+            rsf.GetData("select * from SpisokDoljnostei", kursach.Program.Pole.pole);
             dataGridView1.Columns[1].HeaderText = "Должность";
             dataGridView1.Columns[2].HeaderText = "Оклад";
+            dataGridView1.Columns[3].HeaderText = "Ден. ед.";
             }
             catch { MessageBox.Show("Error"); }
         }
         //Распписание работы врачей
         private void toolStripMenuItem18_Click(object sender, EventArgs e)
         {
-            try{
+            try
+            {
             n = 8;
             panel1.Controls.Clear();
             //Добавление контейнера        
@@ -600,48 +553,79 @@ namespace kursach
             panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             panel1.Dock = DockStyle.Fill;
             this.Controls.Add(panel1);
-            //Добавление списка Добавить Удалить Редактировать
-            TreeView treeView1 = new TreeView();
-            treeView1.BackColor = Color.LightBlue;
-            treeView1.Width = 230;
-            treeView1.ItemHeight = 57;
-            treeView1.Dock = DockStyle.Left;
-            treeView1.AfterSelect +=
-            new System.Windows.Forms.TreeViewEventHandler(treeView1_AfterSelect);
-            TreeNode tn = new TreeNode("Расписание работы");
-            tn.Expand();
-            tn.Nodes.Add(new TreeNode("Добавить время работы"));
-            tn.Nodes.Add(new TreeNode("Добавить расписание"));
-            tn.Nodes.Add(new TreeNode("Удалить время работы"));
-            tn.Nodes.Add(new TreeNode("Удалить расписание"));
-            tn.Nodes.Add(new TreeNode("Редактировать время работы"));
-            tn.Nodes.Add(new TreeNode("Редактировать расписание"));
-            tn.Nodes.Add(new TreeNode("Расписание"));
-            treeView1.Nodes.Add(tn);
-            panel1.Controls.Add(treeView1);
+            Button addv = new Button();
+            addv.Text = "Добавить время работы";
+            addv.Location = new Point(0, 28);
+            addv.Width = 200;
+            addv.Click += new System.EventHandler(addv_Click);
+            panel1.Controls.Add(addv);
+            Button addr = new Button();
+            addr.Text = "Добавить расписание работы";
+            addr.Location = new Point(200, 28);
+            addr.Width = 200;
+            addr.Click += new System.EventHandler(addr_Click);
+            panel1.Controls.Add(addr);
+            Button editv = new Button();
+            editv.Text = "Редактировать время работ";
+            editv.Location = new Point(400, 28);
+            editv.Width = 200;
+            editv.Click += new System.EventHandler(editv_Click);
+            panel1.Controls.Add(editv);
+            Button editr = new Button();
+            editr.Text = "Редактировать расписание работ";
+            editr.Location = new Point(600, 28);
+            editr.Width = 200;
+            editr.Click += new System.EventHandler(editr_Click);
+            panel1.Controls.Add(editr);
+            Button delv = new Button();
+            delv.Text = "Удалить время работ";
+            delv.Location = new Point(0, 56);
+            delv.Width = 200;
+            delv.Click += new System.EventHandler(delv_Click);
+            panel1.Controls.Add(delv);
+            Button delr = new Button();
+            delr.Text = "Удалить расписание работ";
+            delr.Location = new Point(200, 56);
+            delr.Width = 200;
+            delr.Click += new System.EventHandler(delr_Click);
+            panel1.Controls.Add(delr);
+            Button rasp = new Button();
+            rasp.Text = "Расписание";
+            rasp.Location = new Point(400, 56);
+            rasp.Width = 200;
+            rasp.Click += new System.EventHandler(rasp_Click);
+            panel1.Controls.Add(rasp);
             DataGridView dataGridView1 = new DataGridView();
             dataGridView1.AutoSize = true;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridView1.Location = new Point(230, 28);
+            dataGridView1.Location = new Point(0, 84);
             dataGridView1.DataMember = "Table";
             panel1.Controls.Add(dataGridView1);
             //Свяжите DataGridView к BindingSource И загрузить данные из базы данных.
-            dataGridView1.DataSource = bindingSource1;
-            GetData("select * from Raspisanie");
-            DataGridView dataGridView2 = new DataGridView();
-            dataGridView2.AutoSize = true;
-            dataGridView2.Location = new Point(605, 28);
-            dataGridView2.DataMember = "Table";
-            panel1.Controls.Add(dataGridView2);
+            dataGridView1.DataSource = rsf.bindingSource1;
+            rsf.GetData("select * from Vrach,Vrem,Raspisanie where Raspisanie.IDVrem=Vrem.ID AND Raspisanie.IDVrach=Vrach.ID", kursach.Program.Pole.pole);
+            //DataGridView dataGridView2 = new DataGridView();
+            //dataGridView2.AutoSize = true;
+            //dataGridView2.Location = new Point(605, 28);
+            //dataGridView2.DataMember = "Table";
+            //panel1.Controls.Add(dataGridView2);
             //Свяжите DataGridView к BindingSource И загрузить данные из базы данных.
-            dataGridView2.DataSource = bindingSource2;
-            GetData2("select * from Vrem");
-            dataGridView1.Columns[1].HeaderText = "ID времени";
-            dataGridView1.Columns[2].HeaderText = "ID врача";
-
-            dataGridView2.Columns[1].HeaderText = "День";
-            dataGridView2.Columns[2].HeaderText = "Начало";
-            dataGridView2.Columns[3].HeaderText = "Конец";
+            //dataGridView2.DataSource = bindingSource2;
+            //GetData2("select * from Vrem ");
+            dataGridView1.Columns[1].HeaderText = "ФИО";
+            dataGridView1.Columns[2].Visible = false;
+            dataGridView1.Columns[3].Visible = false;
+            dataGridView1.Columns[4].Visible = false;
+            dataGridView1.Columns[5].Visible = false;
+            dataGridView1.Columns[6].Visible = false;
+            dataGridView1.Columns[7].Visible = false;
+            dataGridView1.Columns[8].Visible = false;
+            dataGridView1.Columns[9].HeaderText = "День";
+            dataGridView1.Columns[10].HeaderText = "Начало";
+            dataGridView1.Columns[11].HeaderText = "Конец";
+            dataGridView1.Columns[12].Visible = false;
+            dataGridView1.Columns[13].Visible = false;
+            dataGridView1.Columns[14].Visible = false;
             }
             catch { MessageBox.Show("Error"); }
         }
@@ -682,13 +666,38 @@ namespace kursach
             dataGridView1.DataMember = "Table";
             panel1.Controls.Add(dataGridView1);
             //Свяжите DataGridView к BindingSource И загрузить данные из базы данных.
-            dataGridView1.DataSource = bindingSource1;
-            GetData("select * from Zapis");
-            dataGridView1.Columns[1].HeaderText = "ID пациента";
-            dataGridView1.Columns[2].HeaderText = "ID врача";
-            dataGridView1.Columns[3].HeaderText = "ID услуги";
-            dataGridView1.Columns[4].HeaderText = "Дата";
-            dataGridView1.Columns[5].HeaderText = "Время";
+            dataGridView1.DataSource = rsf.bindingSource1;
+            rsf.GetData("select * from Zapis,Pacient,Uslugi,Raspisanie,Vrach,Vrem where Zapis.IDPacienta=Pacient.ID AND Zapis.IDUslugi=Uslugi.ID AND Zapis.IDRaspisania=Raspisanie.ID AND Raspisanie.IDVrach=Vrach.ID AND Raspisanie.IDVrem=Vrem.ID", kursach.Program.Pole.pole);
+            dataGridView1.Columns[1].Visible = false;
+            dataGridView1.Columns[2].Visible = false;
+            dataGridView1.Columns[3].Visible = false;
+            dataGridView1.Columns[5].Visible = false;
+            dataGridView1.Columns[7].Visible = false;
+            dataGridView1.Columns[8].Visible = false;
+            dataGridView1.Columns[9].Visible = false;
+            dataGridView1.Columns[10].Visible = false;
+            dataGridView1.Columns[11].Visible = false;
+            dataGridView1.Columns[12].Visible = false;
+            dataGridView1.Columns[14].Visible = false;
+            dataGridView1.Columns[15].Visible = false;
+            dataGridView1.Columns[16].Visible = false;
+            dataGridView1.Columns[17].Visible = false;
+            dataGridView1.Columns[18].Visible = false;
+            dataGridView1.Columns[19].Visible = false;
+            dataGridView1.Columns[21].Visible = false;
+            dataGridView1.Columns[22].Visible = false;
+            dataGridView1.Columns[23].Visible = false;
+            dataGridView1.Columns[24].Visible = false;
+            dataGridView1.Columns[25].Visible = false;
+            dataGridView1.Columns[26].Visible = false;
+            dataGridView1.Columns[27].Visible = false;
+            dataGridView1.Columns[4].HeaderText = "Дата приема";
+            dataGridView1.Columns[6].HeaderText = "ФИО пациента";
+            dataGridView1.Columns[13].HeaderText = "Услуга";
+            dataGridView1.Columns[20].HeaderText = "ФИО врача";
+            dataGridView1.Columns[28].HeaderText = "День";
+            dataGridView1.Columns[29].HeaderText = "Начало";
+            dataGridView1.Columns[30].HeaderText = "Конец";
         }
         //Данные о выполненной работе
         private void toolStripMenuItem19_Click(object sender, EventArgs e)
@@ -718,6 +727,18 @@ namespace kursach
             button3.Width = 200;
             button3.Click += new System.EventHandler(button3_Click);
             panel1.Controls.Add(button3);
+            Button button4 = new Button();
+            button4.Text = "Показать используемое оборудование";
+            button4.Location = new Point(600, 28);
+            button4.Width = 300;
+            button4.Click += new System.EventHandler(button4_Click);
+            panel1.Controls.Add(button4);
+            Button button5 = new Button();
+            button5.Text = "Показать используемые медикаменты";
+            button5.Location = new Point(900, 28);
+            button5.Width = 300;
+            button5.Click += new System.EventHandler(button5_Click);
+            panel1.Controls.Add(button5);
             DataGridView dataGridView1 = new DataGridView();
             dataGridView1.AutoSize = true;
             dataGridView1.AutoSizeColumnsMode =  DataGridViewAutoSizeColumnsMode.AllCells;
@@ -725,20 +746,61 @@ namespace kursach
             dataGridView1.DataMember = "Table";
             panel1.Controls.Add(dataGridView1);
             //Свяжите DataGridView к BindingSource И загрузить данные из базы данных.
-            dataGridView1.DataSource = bindingSource1;
-            GetData("select * from JurnalRabot");
-            dataGridView1.Columns[1].HeaderText = "ID записи";
-            dataGridView1.Columns[2].HeaderText = "Цена";
-            dataGridView1.Columns[3].HeaderText = "Скидка";
-            dataGridView1.Columns[4].HeaderText = "Итого";
+            dataGridView1.DataSource = rsf.bindingSource1;
+            rsf.GetData("select * from Zapis,Pacient,Uslugi,Raspisanie,Vrach,Vrem,JurnalRabot where JurnalRabot.IDZapisi=Zapis.ID AND Zapis.IDPacienta=Pacient.ID AND Zapis.IDUslugi=Uslugi.ID AND Zapis.IDRaspisania=Raspisanie.ID AND Raspisanie.IDVrach=Vrach.ID AND Raspisanie.IDVrem=Vrem.ID", kursach.Program.Pole.pole);
+            dataGridView1.Columns[0].Visible = false;
+            dataGridView1.Columns[1].Visible = false;
+            dataGridView1.Columns[2].Visible = false;
+            dataGridView1.Columns[3].Visible = false;
+            dataGridView1.Columns[5].Visible = false;
+            dataGridView1.Columns[7].Visible = false;
+            dataGridView1.Columns[8].Visible = false;
+            dataGridView1.Columns[9].Visible = false;
+            dataGridView1.Columns[10].Visible = false;
+            dataGridView1.Columns[11].Visible = false;
+            dataGridView1.Columns[12].Visible = false;
+            dataGridView1.Columns[16].Visible = false;
+            dataGridView1.Columns[17].Visible = false;
+            dataGridView1.Columns[18].Visible = false;
+            dataGridView1.Columns[19].Visible = false;
+            dataGridView1.Columns[21].Visible = false;
+            dataGridView1.Columns[22].Visible = false;
+            dataGridView1.Columns[23].Visible = false;
+            dataGridView1.Columns[24].Visible = false;
+            dataGridView1.Columns[25].Visible = false;
+            dataGridView1.Columns[26].Visible = false;
+            dataGridView1.Columns[27].Visible = false;
+            dataGridView1.Columns[31].HeaderText = "ID";
+            dataGridView1.Columns[32].Visible = false;
+            dataGridView1.Columns[4].HeaderText = "Дата приема";
+            dataGridView1.Columns[6].HeaderText = "ФИО пациента";
+            dataGridView1.Columns[13].HeaderText = "Услуга";
+            dataGridView1.Columns[14].HeaderText = "Цена услуги";
+            dataGridView1.Columns[15].HeaderText = "Ден. ед.";
+            dataGridView1.Columns[20].HeaderText = "ФИО врача";
+            dataGridView1.Columns[28].Visible = false;
+            dataGridView1.Columns[29].Visible = false;
+            dataGridView1.Columns[30].Visible = false;
+            dataGridView1.Columns[33].HeaderText = "Цена";
+            dataGridView1.Columns[34].HeaderText = "Скидка";
+            dataGridView1.Columns[35].HeaderText = "Итого";
         }
+        
         //Акт выполненных работ
         CheckBox cb = new CheckBox();
         CheckBox cb2 = new CheckBox();
         TextBox t = new TextBox();
-      public  SaveFileDialog sfd = new SaveFileDialog();
+        ComboBox cb1 = new ComboBox();
+        public  SaveFileDialog sfd = new SaveFileDialog();
          private void toolStripMenuItem20_Click(object sender, EventArgs e)
         {
+             DB5 db5 = new DB5(kursach.Program.Pole.pole);
+        DB1 db1 = new DB1(kursach.Program.Pole.pole);
+        DB13 db13 = new DB13(kursach.Program.Pole.pole);
+        DB11 db11 = new DB11(kursach.Program.Pole.pole);
+        DB14 db14 = new DB14(kursach.Program.Pole.pole);
+        DB15 db15 = new DB15(kursach.Program.Pole.pole);
+        DB16 db16 = new DB16(kursach.Program.Pole.pole);
             temp = 3;
             panel1.Controls.Clear();
             //Добавление контейнера        
@@ -760,9 +822,51 @@ namespace kursach
             l.Width = 300;
             panel1.Controls.Add(l);
             
-            t.Location = new Point(40, 160);
-            t.Width = 300;
-            panel1.Controls.Add(t);
+            cb1.Location = new Point(40, 160);
+            cb1.Width = 800;
+            var JurnalRabot = from n2 in db5.JurnalRabot
+                              select n2;
+            foreach (var i in JurnalRabot)
+            {
+                var Zapis = from n2 in db16.Zapis
+                            where n2.ID == i.IDZapisi
+                            select n2;
+                foreach (var r in Zapis)
+                {
+                    var Pacient = from n2 in db1.Pacient
+                                  where n2.ID == r.IDPacienta
+                                  select n2;
+                    var Uslugi = from n2 in db13.Uslugi
+                                 where n2.ID == r.IDUslugi
+                                 select n2;
+                    var Raspisanie = from n2 in db11.Raspisanie
+                                     where n2.ID == r.IDRaspisania
+                                     select n2;
+                    foreach (var j in Pacient)
+                    {
+                        foreach (var k in Uslugi)
+                        {
+                            foreach (var u in Raspisanie)
+                            {
+                                var Vrem = from n2 in db15.Vrem
+                                           where n2.ID == u.IDVrem
+                                           select n2;
+                                var Vrach = from n2 in db14.Vrach
+                                            where n2.ID == u.IDVrach
+                                            select n2;
+                                foreach (var h in Vrem)
+                                {
+                                    foreach (var g in Vrach)
+                                    {
+                                        cb1.Items.Add(i.ID + " " + " Цена " + i.Cena + " Итог " + i.Itog + " Пациент " + j.FIO + " Услуга " + k.Name + " Врач " + g.FIO + " Дата " + r.Data + " " + h.VremN + "-" + h.VremK);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            panel1.Controls.Add(cb1);
             Button button = new Button();
             button.Text = "Создать акт работ";
             button.Location = new Point(40, 200);
@@ -773,6 +877,13 @@ namespace kursach
         //Счет выполненных работ
         private void toolStripMenuItem21_Click(object sender, EventArgs e)
         {
+            DB5 db5 = new DB5(kursach.Program.Pole.pole);
+            DB1 db1 = new DB1(kursach.Program.Pole.pole);
+            DB13 db13 = new DB13(kursach.Program.Pole.pole);
+            DB11 db11 = new DB11(kursach.Program.Pole.pole);
+            DB14 db14 = new DB14(kursach.Program.Pole.pole);
+            DB15 db15 = new DB15(kursach.Program.Pole.pole);
+            DB16 db16 = new DB16(kursach.Program.Pole.pole);
             temp = 4;
             panel1.Controls.Clear();
             //Добавление контейнера        
@@ -793,10 +904,51 @@ namespace kursach
             l.Location = new Point(40, 120);
             l.Width = 300;
             panel1.Controls.Add(l);
-
-            t.Location = new Point(40, 160);
-            t.Width = 300;
-            panel1.Controls.Add(t);
+            cb1.Location = new Point(40, 160);
+            cb1.Width = 800;
+            var JurnalRabot = from n2 in db5.JurnalRabot
+                              select n2;
+            foreach (var i in JurnalRabot)
+            {
+                var Zapis = from n2 in db16.Zapis
+                            where n2.ID == i.IDZapisi
+                            select n2;
+                foreach (var r in Zapis)
+                {
+                    var Pacient = from n2 in db1.Pacient
+                                  where n2.ID == r.IDPacienta
+                                  select n2;
+                    var Uslugi = from n2 in db13.Uslugi
+                                 where n2.ID == r.IDUslugi
+                                 select n2;
+                    var Raspisanie = from n2 in db11.Raspisanie
+                                     where n2.ID == r.IDRaspisania
+                                     select n2;
+                    foreach (var j in Pacient)
+                    {
+                        foreach (var k in Uslugi)
+                        {
+                            foreach (var u in Raspisanie)
+                            {
+                                var Vrem = from n2 in db15.Vrem
+                                           where n2.ID == u.IDVrem
+                                           select n2;
+                                var Vrach = from n2 in db14.Vrach
+                                            where n2.ID == u.IDVrach
+                                            select n2;
+                                foreach (var h in Vrem)
+                                {
+                                    foreach (var g in Vrach)
+                                    {
+                                        cb1.Items.Add(i.ID + " " + " Цена " + i.Cena + " Итог " + i.Itog + " Пациент " + j.FIO + " Услуга " + k.Name + " Врач " + g.FIO + " Дата " + r.Data + " " + h.VremN + "-" + h.VremK);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            panel1.Controls.Add(cb1);
             Button button = new Button();
             button.Text = "Создать счет работ";
             button.Location = new Point(40, 200);
@@ -813,49 +965,66 @@ namespace kursach
                     case 1:
                         operac.Zapis f = new operac.Zapis();
                         f.ShowDialog(); // показываем  
-                        GetData(dataAdapter.SelectCommand.CommandText);
+                        rsf.GetData(rsf.dataAdapter.SelectCommand.CommandText, kursach.Program.Pole.pole);
                         break;
                     case 2:
-                        operac.Rabot f2 = new operac.Rabot();
-                        GetData(dataAdapter.SelectCommand.CommandText);
+                        operac.Rabot f2 = new operac.Rabot();                        
                         f2.ShowDialog(); // показываем  
+                        rsf.GetData(rsf.dataAdapter.SelectCommand.CommandText, kursach.Program.Pole.pole);
                         break;
-                    case 3:Met5 m = new Met5();
-                        if(m.prov_id2(Convert.ToInt32(t.Text))){ 
+                    case 3:
+                        Met5 m = new Met5();                        
                             if (cb.Checked == true) 
-                    {
-                        
-                        sfd.Filter = "PDF Document|*.pdf";
-                        sfd.ShowDialog();
-                        AktPdf a = new AktPdf();
-                        a.CozdAktPdf(sfd.FileName,Convert.ToInt32(t.Text));
-                        
-                    }
+                            {                        
+                                sfd.Filter = "PDF Document|*.pdf";
+                                sfd.ShowDialog();
+                                AktPdf a = new AktPdf();
+                                string[] str = cb1.Items[cb1.SelectedIndex].ToString().Split(new char[] { ' ' });                
+                                a.CozdAktPdf(sfd.FileName, Convert.ToInt32(str[0]));  //                     
+                            }
                         if (cb2.Checked == true) 
                         {
-                            string push = @"D:\Akt.odt";
+                            sfd.Filter = "Writer Document|*.odt";
+                            sfd.ShowDialog();
+                            string push = sfd.FileName;
                             AktWriter a = new AktWriter();
-                            a.CozdAktWriter(push, Convert.ToInt32(t.Text));
-                        }}else {MessageBox.Show("ID не существует");}
+                            string[] str = cb1.Items[cb1.SelectedIndex].ToString().Split(new char[] { ' ' });
+                            a.CozdAktWriter(push, Convert.ToInt32(str[0]));
+                        }
                         break;
                     case 4:
                         Met5 m2 = new Met5();
-                        if (m2.prov_id2(Convert.ToInt32(t.Text)))
-                            {
+                        
                         if (cb.Checked == true)
                         {                                                        
                                 sfd.Filter = "PDF Document|*.pdf";
                                 sfd.ShowDialog();
                                 SchetPdf a = new SchetPdf();
-                                a.CozdSchetPdf(sfd.FileName, Convert.ToInt32(t.Text));
+                                string[] str = cb1.Items[cb1.SelectedIndex].ToString().Split(new char[] { ' ' });                
+                                
+                                a.CozdSchetPdf(sfd.FileName, Convert.ToInt32(str[0]));
                             }
                             if (cb2.Checked == true) 
                         {
-                            string push = @"D:\Schet.odt";
+                            sfd.Filter = "Writer Document|*.odt";
+                            sfd.ShowDialog();
+                            string push = sfd.FileName;
                             SchetWriter a = new SchetWriter();
-                            a.CozdSchetWriter(push, Convert.ToInt32(t.Text));
+                            string[] str = cb1.Items[cb1.SelectedIndex].ToString().Split(new char[] { ' ' });
+                            a.CozdSchetWriter(push, Convert.ToInt32(str[0]));
                         }
-                        }else { MessageBox.Show("ID не существует"); }
+                        break;
+                    case 5:
+                        if (cb.Checked == true)
+                        {
+                            OtchetForm of = new OtchetForm();
+                            of.ShowDialog();
+                        }
+                        if (cb2.Checked == true)
+                        {
+                            OtchetExel a = new OtchetExel();
+                            a.SozdOtchetExel(Convert.ToInt32(t.Text));
+                        }
                         break;
                 }
             }catch(ArgumentOutOfRangeException){MessageBox.Show("Не все поля заполнены");}
@@ -874,7 +1043,7 @@ namespace kursach
                     f2.ShowDialog(); // показываем  
                     break;
             }
-            GetData(dataAdapter.SelectCommand.CommandText);
+            rsf.GetData(rsf.dataAdapter.SelectCommand.CommandText, kursach.Program.Pole.pole);
         }
         private void button3_Click(object sender, EventArgs e)
         {
@@ -889,9 +1058,18 @@ namespace kursach
                     f2.ShowDialog(); // показываем
                     break;
             }
-            GetData(dataAdapter.SelectCommand.CommandText);
+            rsf.GetData(rsf.dataAdapter.SelectCommand.CommandText, kursach.Program.Pole.pole);
         }
-        
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Form2 f = new Form2();
+            f.ShowDialog();
+        }
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Form5 f = new Form5();
+            f.ShowDialog();
+        }
         
 
         //Задать строку подключения
@@ -917,6 +1095,120 @@ namespace kursach
         {
             Settings.Skidka f = new Settings.Skidka();
             f.ShowDialog(); // показываем
+        }
+       
+        //Отчеты
+        //Журнал закупок
+        private void toolStripMenuItem13_Click(object sender, EventArgs e)
+        {
+            panel1.Controls.Clear();
+            //Добавление контейнера        
+            panel1.AutoScroll = true;
+            panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel1.Dock = DockStyle.Fill;
+            this.Controls.Add(panel1);            
+            DataGridView dataGridView1 = new DataGridView();
+            dataGridView1.AutoSize = true;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridView1.Location = new Point(0, 28);
+            dataGridView1.DataMember = "Table";
+            panel1.Controls.Add(dataGridView1);
+            //Свяжите DataGridView к BindingSource И загрузить данные из базы данных.
+            dataGridView1.DataSource = rsf.bindingSource1;
+            rsf.GetData("select * from JurnalPriema,Postavshik,Medicament where JurnalPriema.IDPostavshika=Postavshik.ID AND JurnalPriema.IDRashodnika=Medicament.ID", kursach.Program.Pole.pole);
+            dataGridView1.Columns[1].Visible = false;
+            dataGridView1.Columns[2].Visible = false;
+            dataGridView1.Columns[3].HeaderText = "Количество";
+            dataGridView1.Columns[4].HeaderText = "Цена";
+            dataGridView1.Columns[5].HeaderText = "Дата";
+            dataGridView1.Columns[6].Visible = false;
+            dataGridView1.Columns[8].Visible = false;
+            dataGridView1.Columns[9].Visible = false;
+            dataGridView1.Columns[11].Visible = false;
+            dataGridView1.Columns[12].Visible = false;
+            dataGridView1.Columns[13].Visible = false;
+            dataGridView1.Columns[14].Visible = false;
+            dataGridView1.Columns[15].Visible = false;
+            dataGridView1.Columns[7].HeaderText = "Название";
+            dataGridView1.Columns[10].HeaderText = "фирма";
+        }
+        //Журнал заказов
+        private void toolStripMenuItem14_Click(object sender, EventArgs e)
+        {
+            panel1.Controls.Clear();
+            //Добавление контейнера        
+            panel1.AutoScroll = true;
+            panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel1.Dock = DockStyle.Fill;
+            this.Controls.Add(panel1);
+            DataGridView dataGridView1 = new DataGridView();
+            dataGridView1.AutoSize = true;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridView1.Location = new Point(0, 28);
+            dataGridView1.DataMember = "Table";
+            panel1.Controls.Add(dataGridView1);
+            //Свяжите DataGridView к BindingSource И загрузить данные из базы данных.
+            dataGridView1.DataSource = rsf.bindingSource1;
+            rsf.GetData("select * from JurnalZakupok,Postavshik,Medicament where JurnalZakupok.IDPostovshika=Postavshik.ID AND JurnalZakupok.IDRashodnika=Medicament.ID", kursach.Program.Pole.pole);
+            dataGridView1.Columns[1].Visible = false;
+            dataGridView1.Columns[2].Visible = false;
+            dataGridView1.Columns[5].Visible = false;
+            dataGridView1.Columns[7].Visible = false;
+            dataGridView1.Columns[8].Visible = false;
+            dataGridView1.Columns[9].Visible = false;
+            dataGridView1.Columns[10].Visible = false;
+            dataGridView1.Columns[12].Visible = false;
+            dataGridView1.Columns[13].Visible = false;
+            dataGridView1.Columns[14].Visible = false;
+            dataGridView1.Columns[15].Visible = false;
+            dataGridView1.Columns[16].Visible = false;
+            dataGridView1.Columns[18].Visible = false;
+            dataGridView1.Columns[3].HeaderText = "Количество";
+            dataGridView1.Columns[4].HeaderText = "Дата";
+            dataGridView1.Columns[6].HeaderText = "Фирма";
+            dataGridView1.Columns[11].HeaderText = "Название";
+            dataGridView1.Columns[17].HeaderText = "Ед. изм.";
+        }
+        //Отчет о работе фирмы
+        private void toolStripMenuItem22_Click(object sender, EventArgs e)
+        {
+            temp = 5;
+            panel1.Controls.Clear();
+            //Добавление контейнера        
+            panel1.AutoScroll = true;
+            panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel1.Dock = DockStyle.Fill;
+            this.Controls.Add(panel1);
+            cb.Text = "Сформировать отчет в программе";
+            cb.Location = new Point(40, 40);
+            cb.Width = 300;
+            panel1.Controls.Add(cb);
+            cb2.Text = "Сформировать отчет в Exel";
+            cb2.Location = new Point(40, 80);
+            cb2.Width = 300;
+            panel1.Controls.Add(cb2);
+
+            Label l = new Label();
+            l.Text = "Введите год";
+            l.Location = new Point(40, 120);
+            l.Width = 300;
+            panel1.Controls.Add(l);
+
+            t.Location = new Point(40, 160);
+            t.Width = 300;
+            panel1.Controls.Add(t);
+            Button button = new Button();
+            button.Text = "Создать отчет";
+            button.Location = new Point(40, 200);
+            button.Width = 300;
+            button.Click += new System.EventHandler(button_Click);
+            panel1.Controls.Add(button);
+        }
+        //О фирме
+        private void toolStripMenuItem12_Click(object sender, EventArgs e)
+        {
+            Firma f=new Firma();
+            f.ShowDialog();
         }
 
         

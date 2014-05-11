@@ -34,6 +34,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button2
@@ -60,7 +62,7 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(12, 80);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(202, 25);
+            this.textBox2.Size = new System.Drawing.Size(130, 25);
             this.textBox2.TabIndex = 9;
             this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
@@ -89,6 +91,22 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Наименование";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(144, 58);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 19);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Ден. ед.";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(148, 80);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(66, 25);
+            this.textBox3.TabIndex = 13;
+            // 
             // DUslugi
             // 
             this.AcceptButton = this.button1;
@@ -97,6 +115,8 @@
             this.CancelButton = this.button2;
             this.ClientSize = new System.Drawing.Size(226, 156);
             this.ControlBox = false;
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox2);
@@ -118,5 +138,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox3;
     }
 }

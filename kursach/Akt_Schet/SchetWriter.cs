@@ -21,6 +21,7 @@ namespace kursach
             DB1 db1 = new DB1(kursach.Program.Pole.pole);
             DB14 db14 = new DB14(kursach.Program.Pole.pole);
             DB13 db13 = new DB13(kursach.Program.Pole.pole);
+            Mapping.DB17 db17=new Mapping.DB17(kursach.Program.Pole.pole);
             var ec = from n in db.JurnalRabot
                      where n.ID == Convert.ToInt32(ID)
                      select n;
@@ -28,6 +29,9 @@ namespace kursach
             foreach (var i in ec) { temp = i.IDZapisi; }
             var ec2 = from n in db2.Zapis
                       where n.ID == temp
+                      select n;
+            var Firma = from n in db17.Firma
+                      where n.ID == 1
                       select n;
             string temp2 = "";
             foreach (var i in ec2) { temp2 = i.Data; }
@@ -39,14 +43,21 @@ namespace kursach
 
             unoidl.com.sun.star.text.XTextRange x = ((unoidl.com.sun.star.text.XTextDocument)xComponent).getText().getEnd();  // в конец
             ((unoidl.com.sun.star.text.XTextDocument)xComponent).getText().insertString(x, "от " + temp2 + "г." + Environment.NewLine + Environment.NewLine + Environment.NewLine, true);
-            
-                     
-            
-            foreach (var i in ec2) { temp = i.IDVracha; }
-            var ec4 = from n in db14.Vrach
-                      where n.ID == temp
-                      select n;
-            foreach (var i in ec4) { temp2 = i.FIO; }
+            unoidl.com.sun.star.text.XTextRange xi = ((unoidl.com.sun.star.text.XTextDocument)xComponent).getText().getEnd();  // в конец
+            foreach (var i in Firma)
+            {
+                ((unoidl.com.sun.star.text.XTextDocument)xComponent).getText().insertString(xi, "ИНН " + i.INN + " КПП " + i.KPP + Environment.NewLine + "Получатель " + i.Name + " № Счета " + i.Schet + Environment.NewLine + "Банк получателя " + i.Bank + " № Счета банка " + i.SchetBank + Environment.NewLine,true);
+            }
+
+            DB11 db11 = new DB11(kursach.Program.Pole.pole);
+            var Raspisanie = from n in db11.Raspisanie
+                             where n.ID == temp
+                             select n;
+            foreach (var i in Raspisanie) { temp = i.IDVrach; }
+            var Vrach = from n in db14.Vrach
+                        where n.ID == temp
+                        select n;
+            foreach (var i in Vrach) { temp2 = i.FIO; }
             unoidl.com.sun.star.text.XTextRange x2 = ((unoidl.com.sun.star.text.XTextDocument)xComponent).getText().getEnd();  // в конец
             ((unoidl.com.sun.star.text.XTextDocument)xComponent).getText().insertString(x2, "Исполнитель: " + temp2 + Environment.NewLine, true);
 
@@ -154,11 +165,13 @@ new unoidl.com.sun.star.beans.PropertyValue[1];
             unoidl.com.sun.star.text.XTextRange x4 = ((unoidl.com.sun.star.text.XTextDocument)xComponent).getText().getEnd();  // в конец
             ((unoidl.com.sun.star.text.XTextDocument)xComponent).getText().insertString(x4, "Всего оказано услуг на сумму: " + temp2 + "рублей " + Environment.NewLine + Environment.NewLine  + Environment.NewLine + Environment.NewLine, true);
             string temp3 = "";
-            foreach (var i in ec4) { temp2 = i.FIO; }
+            foreach (var i in Vrach) { temp2 = i.FIO; }
             foreach (var i in ec3) { temp3 = i.FIO; }
             unoidl.com.sun.star.text.XTextRange x5 = ((unoidl.com.sun.star.text.XTextDocument)xComponent).getText().getEnd();  // в конец
-            ((unoidl.com.sun.star.text.XTextDocument)xComponent).getText().insertString(x5, "Исполнитель:__________________ " + temp2 + Environment.NewLine + "Бухгалтер:__________________", true);
-
+            foreach (var i in Firma)
+            {
+                ((unoidl.com.sun.star.text.XTextDocument)xComponent).getText().insertString(x5, "Исполнитель:__________________ " + temp2 + Environment.NewLine + "Бухгалтер:__________________"+i.Buh, true);
+            }
             ((XStorable)xComponent).storeToURL(@"file:///" + push.Replace(@"\", "/"), new unoidl.com.sun.star.beans.PropertyValue[0]);
             xComponent.dispose();
         }

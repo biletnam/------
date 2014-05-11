@@ -34,8 +34,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -101,23 +101,22 @@
             this.button2.Text = "Отмена";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // maskedTextBox1
+            // dateTimePicker1
             // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(12, 82);
-            this.maskedTextBox1.Mask = "00:00";
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(260, 25);
-            this.maskedTextBox1.TabIndex = 7;
-            this.maskedTextBox1.ValidatingType = typeof(System.DateTime);
+            this.dateTimePicker1.Location = new System.Drawing.Point(12, 82);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.ShowUpDown = true;
+            this.dateTimePicker1.Size = new System.Drawing.Size(260, 25);
+            this.dateTimePicker1.TabIndex = 9;
+            this.dateTimePicker1.Value = new System.DateTime(2014, 5, 9, 17, 54, 0, 0);
             // 
-            // maskedTextBox2
+            // dateTimePicker2
             // 
-            this.maskedTextBox2.Location = new System.Drawing.Point(12, 132);
-            this.maskedTextBox2.Mask = "00:00";
-            this.maskedTextBox2.Name = "maskedTextBox2";
-            this.maskedTextBox2.Size = new System.Drawing.Size(260, 25);
-            this.maskedTextBox2.TabIndex = 8;
-            this.maskedTextBox2.ValidatingType = typeof(System.DateTime);
+            this.dateTimePicker2.Location = new System.Drawing.Point(12, 132);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.ShowUpDown = true;
+            this.dateTimePicker2.Size = new System.Drawing.Size(260, 25);
+            this.dateTimePicker2.TabIndex = 10;
             // 
             // DVrem
             // 
@@ -125,10 +124,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button2;
-            this.ClientSize = new System.Drawing.Size(284, 196);
+            this.ClientSize = new System.Drawing.Size(288, 196);
             this.ControlBox = false;
-            this.Controls.Add(this.maskedTextBox2);
-            this.Controls.Add(this.maskedTextBox1);
+            this.Controls.Add(this.dateTimePicker2);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
@@ -137,6 +136,7 @@
             this.Controls.Add(this.comboBox1);
             this.Name = "DVrem";
             this.Text = "DVrem";
+            this.Load += new System.EventHandler(this.DVrem_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -150,7 +150,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
     }
 }

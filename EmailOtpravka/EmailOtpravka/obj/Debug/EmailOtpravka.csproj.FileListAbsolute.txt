@@ -1,0 +1,4 @@
+C:\Users\silvestor\Desktop\OOP\kursach\EmailOtpravka\EmailOtpravka\bin\Debug\EmailOtpravka.dll
+C:\Users\silvestor\Desktop\OOP\kursach\EmailOtpravka\EmailOtpravka\bin\Debug\EmailOtpravka.pdb
+C:\Users\silvestor\Desktop\OOP\kursach\EmailOtpravka\EmailOtpravka\obj\Debug\EmailOtpravka.dll
+C:\Users\silvestor\Desktop\OOP\kursach\EmailOtpravka\EmailOtpravka\obj\Debug\EmailOtpravka.pdb

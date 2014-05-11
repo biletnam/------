@@ -15,7 +15,11 @@ namespace kursach
         [Column]
         public string Name;
         [Column]
-        public string Email;        
+        public string Email;
+        [Column]
+        public string Adres; 
+        [Column]
+        public string Telefon;        
     }
     public class DB10 : DataContext
     {
@@ -29,24 +33,28 @@ namespace kursach
     public class Met10
     {
         DB10 db10 = new DB10(kursach.Program.Pole.pole);
-        public void ADD(string Name, string Email)
+        public void ADD(string Name, string Email, string Adres, string Telefon)
         {
             Postavshik pac = new Postavshik();
             pac.Name = Name;
             pac.Email = Email;
+            pac.Adres = Adres;
+            pac.Telefon = Telefon;
             db10.Postavshik.InsertOnSubmit(pac);
             db10.SubmitChanges();
         }
-        public void Edit(int ID, string Name,string Email)
+        public void Edit(int ID, string Name, string Email, string Adres, string Telefon)
         {
             Postavshik pac = db10.Postavshik.Where(c => c.ID == ID).FirstOrDefault();
             pac.Name = Name;
             pac.Email = Email;
+            pac.Adres = Adres;
+            pac.Telefon = Telefon;
             db10.SubmitChanges();
         }
-        public void Delete(int ID)
+        public void Delete(string Name)
         {
-            Postavshik pac = db10.Postavshik.Where(c => c.ID == ID).FirstOrDefault();
+            Postavshik pac = db10.Postavshik.Where(c => c.Name == Name).FirstOrDefault();
             db10.Postavshik.DeleteOnSubmit(pac);
             db10.SubmitChanges();
         }

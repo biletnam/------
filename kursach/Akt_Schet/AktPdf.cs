@@ -53,11 +53,16 @@ namespace kursach
                 a2.Add(Environment.NewLine);
                 doc.Add(a2);
                 Paragraph a3 = new Paragraph();
-                foreach (var i in ec2) { temp = i.IDVracha; }
-                var ec4 = from n in db14.Vrach
+                foreach (var i in ec2) { temp = i.IDRaspisania; }
+                DB11 db11 = new DB11(kursach.Program.Pole.pole);
+                var Raspisanie = from n in db11.Raspisanie
                           where n.ID == temp
                           select n;
-                foreach (var i in ec4) { temp2 = i.FIO; }
+                foreach (var i in Raspisanie) { temp = i.IDVrach; }
+                var Vrach = from n in db14.Vrach
+                          where n.ID == temp
+                          select n;
+                foreach (var i in Vrach) { temp2 = i.FIO; }
                 a3.Add(new Phrase("Исполнитель: " + temp2, new iTextSharp.text.Font(basefont, 14, iTextSharp.text.Font.NORMAL, new BaseColor(Color.Black))));
                 a3.Alignment = Element.ALIGN_LEFT;
                 a3.SpacingAfter = 5;
@@ -117,7 +122,7 @@ namespace kursach
                 a4.Add(Environment.NewLine);
                 a4.Add(Environment.NewLine);
                 string temp3 = "";
-                foreach (var i in ec4) { temp2 = i.FIO; }
+                foreach (var i in Vrach) { temp2 = i.FIO; }
                 foreach (var i in ec3) { temp3 = i.FIO; }
                 a4.Add(new Phrase("Исполнитель: " + temp2 + "                                          Заказчик: " + temp3, new iTextSharp.text.Font(basefont, 14, iTextSharp.text.Font.ITALIC, new BaseColor(Color.Black))));
                 a4.Add(Environment.NewLine);

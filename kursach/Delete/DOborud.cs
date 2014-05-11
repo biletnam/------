@@ -21,7 +21,7 @@ namespace kursach.Delete
             try
             {
                 Met9 m = new Met9();
-                m.Delete(Convert.ToInt32(textBox1.Text));
+                m.Delete(comboBox1.Items[comboBox1.SelectedIndex].ToString());
                 this.Close();
             }
             catch { MessageBox.Show("Error"); }
@@ -46,6 +46,16 @@ namespace kursach.Delete
                 {
                     e.Handled = true;
                 }
+            }
+        }
+        DB9 db9 = new DB9(kursach.Program.Pole.pole);
+        private void DOborud_Load(object sender, EventArgs e)
+        {
+            var ec = from n2 in db9.Oborud
+                     select n2;
+            foreach (var i in ec)
+            {
+                comboBox1.Items.Add(i.Name);
             }
         }
     }

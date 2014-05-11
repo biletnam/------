@@ -15,7 +15,9 @@ namespace kursach
         [Column]
         public string Name;
         [Column]
-        public int Cena;        
+        public int Cena; 
+        [Column]
+        public string Ed;       
     }
     public class DB13 : DataContext
     {
@@ -28,25 +30,27 @@ namespace kursach
     }
     public class Met13
     {
-        DB13 db13 = new DB13(kursach.Program.Pole.pole);       
-        public void ADD(string Name,int Cena)
+        DB13 db13 = new DB13(kursach.Program.Pole.pole);
+        public void ADD(string Name, int Cena, string Ed)
         {
             Uslugi pac = new Uslugi();
             pac.Name = Name;
-            pac.Cena = Cena;            
+            pac.Cena = Cena; 
+            pac.Ed = Ed; 
             db13.Uslugi.InsertOnSubmit(pac);
             db13.SubmitChanges();
         }
-        public void Edit(int ID, string Name, int Cena)
+        public void Edit(int ID, string Name, int Cena, string Ed)
         {
             Uslugi pac = db13.Uslugi.Where(c => c.ID == ID).FirstOrDefault();
             pac.Name = Name;
             pac.Cena = Cena;
+            pac.Ed = Ed;
             db13.SubmitChanges();
         }
-        public void Delete(int ID)
+        public void Delete(string Name)
         {
-            Uslugi pac = db13.Uslugi.Where(c => c.ID == ID).FirstOrDefault();
+            Uslugi pac = db13.Uslugi.Where(c => c.Name == Name).FirstOrDefault();
             db13.Uslugi.DeleteOnSubmit(pac);
             db13.SubmitChanges();
         }

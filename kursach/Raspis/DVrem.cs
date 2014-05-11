@@ -21,11 +21,19 @@ namespace kursach.Raspis
             try
             {
                 Met15 d = new Met15();
-                d.ADD(comboBox1.Items[comboBox1.SelectedIndex].ToString(), maskedTextBox1.Text, maskedTextBox2.Text);
+                string[] str2 = dateTimePicker2.Value.ToString().Split(new char[] { ' ' });
+                string[] str = dateTimePicker1.Value.ToString().Split(new char[] { ' ' });                
+                d.ADD(comboBox1.Items[comboBox1.SelectedIndex].ToString(),str[1] , str2[1]);
                     this.Close();
             }
             catch (ArgumentOutOfRangeException) { MessageBox.Show("Не все поля заполнены"); }
             catch { MessageBox.Show("Error"); }
+        }
+
+        private void DVrem_Load(object sender, EventArgs e)
+        {
+            dateTimePicker1.Format = DateTimePickerFormat.Time;
+            dateTimePicker2.Format = DateTimePickerFormat.Time;
         }
     }
 }

@@ -34,15 +34,19 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button2
             // 
             this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button2.Location = new System.Drawing.Point(106, 174);
+            this.button2.Location = new System.Drawing.Point(97, 268);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 14;
@@ -51,7 +55,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(16, 174);
+            this.button1.Location = new System.Drawing.Point(16, 268);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 15;
@@ -91,13 +95,6 @@
             this.label1.TabIndex = 10;
             this.label1.Text = "Наименование";
             // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(12, 32);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(260, 25);
-            this.textBox3.TabIndex = 16;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -107,16 +104,55 @@
             this.label3.TabIndex = 17;
             this.label3.Text = "ID";
             // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(12, 181);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(260, 25);
+            this.textBox4.TabIndex = 19;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(12, 225);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(260, 25);
+            this.textBox5.TabIndex = 20;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 160);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(47, 19);
+            this.label4.TabIndex = 21;
+            this.label4.Text = "Адрес";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 209);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(63, 19);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "Телефон";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(12, 32);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(260, 25);
+            this.comboBox1.TabIndex = 23;
+            // 
             // button3
             // 
-            this.button3.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button3.Location = new System.Drawing.Point(197, 174);
+            this.button3.Location = new System.Drawing.Point(178, 268);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 18;
+            this.button3.TabIndex = 24;
             this.button3.Text = "Показать";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // RPostavshik
             // 
@@ -125,11 +161,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.CancelButton = this.button2;
-            this.ClientSize = new System.Drawing.Size(284, 206);
+            this.ClientSize = new System.Drawing.Size(284, 303);
             this.ControlBox = false;
             this.Controls.Add(this.button3);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.textBox4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
@@ -138,6 +178,7 @@
             this.Controls.Add(this.label1);
             this.Name = "RPostavshik";
             this.Text = "RPostavshik";
+            this.Load += new System.EventHandler(this.RPostavshik_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -151,8 +192,12 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button3;
     }
 }

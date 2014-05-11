@@ -40,7 +40,7 @@ groupBox2.Visible = false;groupBox4.Visible = false;groupBox6.Visible = false;gr
         private void button2_Click(object sender, EventArgs e)
         {
             string stroka = "";
-            if (checkBox1.Checked == true) { stroka += "1 " + maskedTextBox1.Text+"|" + maskedTextBox2.Text + Environment.NewLine; }
+            if (checkBox1.Checked == true) { stroka += "1 " + maskedTextBox1.Text+" | " + maskedTextBox2.Text + Environment.NewLine; }
             if (checkBox1.Checked == false) { stroka += "0 " + Environment.NewLine; }
             if (checkBox2.Checked == true) { stroka += "1 " + maskedTextBox3.Text + Environment.NewLine; }
             if (checkBox2.Checked == false) { stroka += "0 " + Environment.NewLine; }

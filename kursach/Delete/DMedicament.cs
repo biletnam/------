@@ -21,7 +21,7 @@ namespace kursach.Delete
             try
             {
                 Met7 m = new Met7();
-                m.Delete(Convert.ToInt32(textBox1.Text));
+                m.Delete(comboBox1.Items[comboBox1.SelectedIndex].ToString());
                 this.Close();
             }
             catch { MessageBox.Show("Error"); }
@@ -35,6 +35,16 @@ namespace kursach.Delete
                 {
                     e.Handled = true;
                 }
+            }
+        }
+        DB7 db7 = new DB7(kursach.Program.Pole.pole);
+        private void DMedicament_Load(object sender, EventArgs e)
+        {
+            var ec = from n2 in db7.Medicament
+                     select n2;
+            foreach (var i in ec)
+            {
+                comboBox1.Items.Add(i.Name);
             }
         }
     }

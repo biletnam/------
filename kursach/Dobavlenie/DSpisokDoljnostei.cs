@@ -21,7 +21,7 @@ namespace kursach.Dobavlenie
             try
             {
                 Met12 d = new Met12();
-                d.ADD(textBox1.Text, Convert.ToInt32(textBox2.Text));
+                d.ADD(textBox1.Text, Convert.ToInt32(textBox2.Text),textBox3.Text);
                 this.Close();
             }
             catch (ArgumentOutOfRangeException) { MessageBox.Show("Не все поля заполнены"); }

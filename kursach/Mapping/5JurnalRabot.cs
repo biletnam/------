@@ -5,6 +5,8 @@ using System.Text;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
 using System.Configuration;
+using System.Windows.Forms;
+using System.IO;
 namespace kursach
 {
     [Table]
@@ -36,6 +38,7 @@ namespace kursach
         DB16 db16=new DB16(kursach.Program.Pole.pole);
         DB2 db2 = new DB2(kursach.Program.Pole.pole);
         DB3 db3=new DB3(kursach.Program.Pole.pole);
+        DB1 db1=new DB1(kursach.Program.Pole.pole);
         public void ADD(int IDZapisi, int Cena, int Skidka, int Itog)
         {
             JurnalRabot pac = new JurnalRabot();
@@ -79,33 +82,55 @@ namespace kursach
                 db3.SubmitChanges();
             }
         }
-        public bool prov_id(int id)
+        public int RaschetSkidki(int IDPacient)
         {
-            bool pro = false;
-            var ec = from n in db16.Zapis
-                     select n;
-            foreach (var i in ec)
+            RabotaSFailami.RabotaSFailami rsf = new RabotaSFailami.RabotaSFailami();
+            string stroka = rsf.outFile2(Application.StartupPath.ToString() + "\\Skidka.txt");
+            int ind = 1;
+            int summa=0;
+            string[] Row = stroka.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            int CountRow = Row.Length;
+            string[][] mas = new string[CountRow][];
+            for (int i = 0; i < CountRow; i++)
             {
-                if (id == i.ID)
+                string[] Col = Row[i].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                mas[i] = new string[Col.Length];
+                for (int j = 0; j < mas[i].Length; j++)
                 {
-                    pro = true;
+                    mas[i][j] = Col[j];
                 }
             }
-            return pro;
-        }
-        public bool prov_id2(int id)
-        {
-            bool pro = false;
-            var ec = from n in db5.JurnalRabot
-                     select n;
-            foreach (var i in ec)
+            for (int i = 0; i < CountRow - 1; i++)
             {
-                if (id == i.ID)
+                if (mas[i].Length == mas[i + 1].Length)
                 {
-                    pro = true;
+                    ind++;
                 }
             }
-            return pro;
+            var Pacient = from n2 in db1.Pacient
+                          where n2.ID==IDPacient
+                             select n2;
+            foreach (var i in Pacient)
+            {
+                if (mas[0][0] == "1") 
+                { 
+                    string[] str = mas[0][1].Split(new string[] { "-" }, StringSplitOptions.RemoveEmptyEntries); 
+                    string[] str2 = mas[0][3].Split(new string[] { "-" }, StringSplitOptions.RemoveEmptyEntries);
+                    for (int j=0;j<str.Length; j++)
+                    { 
+                    if(i.Posesh>=Convert.ToInt32(str[j]))
+                    {
+                        summa = Convert.ToInt32(str2[j]);
+                    }
+                    }
+                }
+                if (mas[1][0] == "1" && i.Status=="Пенсионер") { summa += Convert.ToInt32(mas[1][1]); }
+                if (mas[2][0] == "1" && i.Status=="Студент") { summa += Convert.ToInt32(mas[2][1]); }
+                if (mas[3][0] == "1" && i.Status=="Учащийся") { summa += Convert.ToInt32(mas[3][1]); }
+            }
+            if (summa >= 100) { summa = 99; }
+            return summa;
         }
+        
     }
 }

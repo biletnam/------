@@ -15,7 +15,7 @@ namespace kursach.Dobavlenie
         {
             InitializeComponent();
         }
-
+DB12 db12 = new DB12(kursach.Program.Pole.pole);
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!(Char.IsDigit(e.KeyChar)))
@@ -32,15 +32,30 @@ namespace kursach.Dobavlenie
             try
             {
                 Met14 d = new Met14();
-                if (d.prov_id(Convert.ToInt32(textBox2.Text)) == true)
+                var ec = from n2 in db12.SpisokDoljnostei
+                         where n2.Doljnost==comboBox1.Items[comboBox1.SelectedIndex].ToString()
+                         select n2;
+                int temp = 0;
+                foreach (var i in ec)
                 {
-                    d.ADD(textBox1.Text, Convert.ToInt32(textBox2.Text), d.RaschetZarplat2(Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox3.Text), Convert.ToInt32(textBox5.Text),Convert.ToInt32(textBox4.Text) ), DateTime.Today.ToString(), Convert.ToInt32(textBox3.Text), Convert.ToInt32(textBox4.Text), Convert.ToInt32(textBox5.Text));
+                    temp = i.ID;  
+                }       
+                    d.ADD(textBox1.Text, temp, d.RaschetZarplat2(temp, Convert.ToInt32(textBox3.Text), Convert.ToInt32(textBox5.Text),Convert.ToInt32(textBox4.Text) ), DateTime.Today.ToString(), Convert.ToInt32(textBox3.Text), Convert.ToInt32(textBox4.Text), Convert.ToInt32(textBox5.Text));
                     this.Close();
-                }
-                else { MessageBox.Show("ID должности не существует"); }
             }
             catch (ArgumentOutOfRangeException) { MessageBox.Show("Не все поля заполнены"); }
             catch { MessageBox.Show("Error"); }
+        }
+
+        private void DVrach_Load(object sender, EventArgs e)
+        {
+            
+            var ec = from n2 in db12.SpisokDoljnostei
+                      select n2;
+            foreach (var i in ec)
+            {
+                comboBox1.Items.Add(i.Doljnost);
+            }
         }
 
    
